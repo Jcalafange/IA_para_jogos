@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvkx8053yek68"]
+
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
+[ext_resource type="Script" path="res://Scripts/ZoneController.gd" id="1_ljc02"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameController" type="Node2D" parent="."]
+script = ExtResource("1_k3llr")
+
+[node name="Zona1" type="ColorRect" parent="GameController"]
+offset_right = 300.0
+offset_bottom = 300.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona2" type="ColorRect" parent="GameController"]
+offset_left = 300.0
+offset_right = 600.0
+offset_bottom = 300.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona3" type="ColorRect" parent="GameController"]
+offset_left = 600.0
+offset_right = 900.0
+offset_bottom = 300.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona4" type="ColorRect" parent="GameController"]
+offset_top = 300.0
+offset_right = 300.0
+offset_bottom = 600.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona5" type="ColorRect" parent="GameController"]
+offset_left = 300.0
+offset_top = 300.0
+offset_right = 600.0
+offset_bottom = 600.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona6" type="ColorRect" parent="GameController"]
+offset_left = 600.0
+offset_top = 300.0
+offset_right = 900.0
+offset_bottom = 600.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona7" type="ColorRect" parent="GameController"]
+offset_top = 600.0
+offset_right = 300.0
+offset_bottom = 900.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona8" type="ColorRect" parent="GameController"]
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 600.0
+offset_bottom = 900.0
+script = ExtResource("1_ljc02")
+
+[node name="Zona9" type="ColorRect" parent="GameController"]
+offset_left = 600.0
+offset_top = 600.0
+offset_right = 900.0
+offset_bottom = 900.0
+script = ExtResource("1_ljc02")

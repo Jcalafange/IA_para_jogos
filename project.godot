@@ -11,5 +11,6 @@ config_version=5
 [application]
 
 config/name="IA_para_jogos"
+run/main_scene="res://Cena1.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
