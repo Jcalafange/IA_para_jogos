@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvkx8053yek68"]
+[gd_scene load_steps=4 format=3 uid="uid://dvkx8053yek68"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
 [ext_resource type="Script" path="res://Scripts/ZoneController.gd" id="1_ljc02"]
+[ext_resource type="PackedScene" uid="uid://c7yjtaywdoswx" path="res://scenes/ball/ball.tscn" id="3_glsyj"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -13,11 +14,23 @@ offset_right = 300.0
 offset_bottom = 300.0
 script = ExtResource("1_ljc02")
 
+[node name="ball" parent="GameController/Zona1" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
+
+[node name="ball2" parent="GameController/Zona1" instance=ExtResource("3_glsyj")]
+position = Vector2(222, 222)
+
+[node name="ball3" parent="GameController/Zona1" instance=ExtResource("3_glsyj")]
+position = Vector2(84, 93)
+
 [node name="Zona2" type="ColorRect" parent="GameController"]
 offset_left = 300.0
 offset_right = 600.0
 offset_bottom = 300.0
 script = ExtResource("1_ljc02")
+
+[node name="ball" parent="GameController/Zona2" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
 
 [node name="Zona3" type="ColorRect" parent="GameController"]
 offset_left = 600.0
@@ -25,11 +38,17 @@ offset_right = 900.0
 offset_bottom = 300.0
 script = ExtResource("1_ljc02")
 
+[node name="ball" parent="GameController/Zona3" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
+
 [node name="Zona4" type="ColorRect" parent="GameController"]
 offset_top = 300.0
 offset_right = 300.0
 offset_bottom = 600.0
 script = ExtResource("1_ljc02")
+
+[node name="ball" parent="GameController/Zona4" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
 
 [node name="Zona5" type="ColorRect" parent="GameController"]
 offset_left = 300.0
@@ -38,6 +57,9 @@ offset_right = 600.0
 offset_bottom = 600.0
 script = ExtResource("1_ljc02")
 
+[node name="ball" parent="GameController/Zona5" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
+
 [node name="Zona6" type="ColorRect" parent="GameController"]
 offset_left = 600.0
 offset_top = 300.0
@@ -45,11 +67,17 @@ offset_right = 900.0
 offset_bottom = 600.0
 script = ExtResource("1_ljc02")
 
+[node name="ball" parent="GameController/Zona6" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
+
 [node name="Zona7" type="ColorRect" parent="GameController"]
 offset_top = 600.0
 offset_right = 300.0
 offset_bottom = 900.0
 script = ExtResource("1_ljc02")
+
+[node name="ball" parent="GameController/Zona7" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
 
 [node name="Zona8" type="ColorRect" parent="GameController"]
 offset_left = 300.0
@@ -58,9 +86,15 @@ offset_right = 600.0
 offset_bottom = 900.0
 script = ExtResource("1_ljc02")
 
+[node name="ball" parent="GameController/Zona8" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
+
 [node name="Zona9" type="ColorRect" parent="GameController"]
 offset_left = 600.0
 offset_top = 600.0
 offset_right = 900.0
 offset_bottom = 900.0
 script = ExtResource("1_ljc02")
+
+[node name="ball" parent="GameController/Zona9" instance=ExtResource("3_glsyj")]
+position = Vector2(160, 155)
