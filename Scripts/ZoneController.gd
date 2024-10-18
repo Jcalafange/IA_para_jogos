@@ -2,11 +2,10 @@ extends ColorRect
 
 var original_color: Color
 var target_color: Color = Color(0, 1, 0)  # Cor alvo (ex: vermelho)
-@export var balls_in_zone = []
+var balls_in_zone = []
 
 func _ready():
 	original_color = modulate  # Armazena a cor original
-	balls_in_zone = get_children()
 
 func update_color(delta: float, speed: float) -> void:
 	var time = Time.get_ticks_msec() / 1000.0  # Converte milissegundos para segundos
@@ -18,4 +17,4 @@ func is_inside_zone(position: Vector2) -> bool:
 
 func move_balls() -> void:
 	for ball in balls_in_zone:
-		ball.move(25, 275)
+		ball.move((self.position.x + 25), (self.position.x + 275))

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvkx8053yek68"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
-[ext_resource type="Script" path="res://Scripts/ZoneController.gd" id="1_ljc02"]
+[ext_resource type="PackedScene" uid="uid://q8xmtsvy43sd" path="res://scenes/zonas/zona.tscn" id="2_dfa8g"]
 [ext_resource type="PackedScene" uid="uid://c7yjtaywdoswx" path="res://scenes/ball/ball.tscn" id="3_glsyj"]
 
 [node name="Node2D" type="Node2D"]
@@ -9,92 +9,77 @@
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource("1_k3llr")
 
-[node name="Zona1" type="ColorRect" parent="GameController"]
-offset_right = 300.0
-offset_bottom = 300.0
-script = ExtResource("1_ljc02")
+[node name="Zona" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
 
-[node name="ball" parent="GameController/Zona1" instance=ExtResource("3_glsyj")]
+[node name="Zona2" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_left = 300.0
+offset_right = 600.0
+
+[node name="Zona3" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_left = 600.0
+offset_right = 900.0
+
+[node name="Zona4" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_top = 300.0
+offset_bottom = 600.0
+
+[node name="Zona5" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_left = 300.0
+offset_top = 300.0
+offset_right = 600.0
+offset_bottom = 600.0
+
+[node name="Zona6" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_left = 600.0
+offset_top = 300.0
+offset_right = 900.0
+offset_bottom = 600.0
+
+[node name="Zona7" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_top = 600.0
+offset_bottom = 900.0
+
+[node name="Zona8" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 600.0
+offset_bottom = 900.0
+
+[node name="Zona9" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+offset_left = 600.0
+offset_top = 600.0
+offset_right = 900.0
+offset_bottom = 900.0
+
+[node name="ball" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(160, 155)
 
-[node name="ball2" parent="GameController/Zona1" instance=ExtResource("3_glsyj")]
+[node name="ball2" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(222, 222)
 
-[node name="ball3" parent="GameController/Zona1" instance=ExtResource("3_glsyj")]
+[node name="ball3" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(84, 93)
 
-[node name="Zona2" type="ColorRect" parent="GameController"]
-offset_left = 300.0
-offset_right = 600.0
-offset_bottom = 300.0
-script = ExtResource("1_ljc02")
+[node name="ball4" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(460, 155)
 
-[node name="ball" parent="GameController/Zona2" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
+[node name="ball5" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(760, 155)
 
-[node name="Zona3" type="ColorRect" parent="GameController"]
-offset_left = 600.0
-offset_right = 900.0
-offset_bottom = 300.0
-script = ExtResource("1_ljc02")
+[node name="ball6" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(160, 455)
 
-[node name="ball" parent="GameController/Zona3" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
+[node name="ball8" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(760, 455)
 
-[node name="Zona4" type="ColorRect" parent="GameController"]
-offset_top = 300.0
-offset_right = 300.0
-offset_bottom = 600.0
-script = ExtResource("1_ljc02")
+[node name="ball7" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(460, 455)
 
-[node name="ball" parent="GameController/Zona4" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
+[node name="ball9" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(160, 755)
 
-[node name="Zona5" type="ColorRect" parent="GameController"]
-offset_left = 300.0
-offset_top = 300.0
-offset_right = 600.0
-offset_bottom = 600.0
-script = ExtResource("1_ljc02")
+[node name="ball10" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(460, 755)
 
-[node name="ball" parent="GameController/Zona5" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
-
-[node name="Zona6" type="ColorRect" parent="GameController"]
-offset_left = 600.0
-offset_top = 300.0
-offset_right = 900.0
-offset_bottom = 600.0
-script = ExtResource("1_ljc02")
-
-[node name="ball" parent="GameController/Zona6" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
-
-[node name="Zona7" type="ColorRect" parent="GameController"]
-offset_top = 600.0
-offset_right = 300.0
-offset_bottom = 900.0
-script = ExtResource("1_ljc02")
-
-[node name="ball" parent="GameController/Zona7" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
-
-[node name="Zona8" type="ColorRect" parent="GameController"]
-offset_left = 300.0
-offset_top = 600.0
-offset_right = 600.0
-offset_bottom = 900.0
-script = ExtResource("1_ljc02")
-
-[node name="ball" parent="GameController/Zona8" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
-
-[node name="Zona9" type="ColorRect" parent="GameController"]
-offset_left = 600.0
-offset_top = 600.0
-offset_right = 900.0
-offset_bottom = 900.0
-script = ExtResource("1_ljc02")
-
-[node name="ball" parent="GameController/Zona9" instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
+[node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(760, 755)
