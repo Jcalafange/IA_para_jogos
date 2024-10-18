@@ -1,66 +1,72 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvkx8053yek68"]
+[gd_scene load_steps=7 format=3 uid="uid://dvkx8053yek68"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
 [ext_resource type="Script" path="res://Scripts/ZoneController.gd" id="1_ljc02"]
+[ext_resource type="Script" path="res://Scripts/bola.gd" id="3_opcuk"]
+[ext_resource type="Texture2D" uid="uid://cflhx2ul21p2t" path="res://icon.svg" id="4_xq5yl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aosd4"]
+size = Vector2(303, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn4r2"]
+size = Vector2(52, 52)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource("1_k3llr")
 
-[node name="Zona1" type="ColorRect" parent="GameController"]
-offset_right = 300.0
-offset_bottom = 300.0
+[node name="Zona1" type="Area2D" parent="GameController"]
 script = ExtResource("1_ljc02")
 
-[node name="Zona2" type="ColorRect" parent="GameController"]
-offset_left = 300.0
-offset_right = 600.0
-offset_bottom = 300.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona1"]
+position = Vector2(150.5, 151)
+shape = SubResource("RectangleShape2D_aosd4")
+
+[node name="Zona2" type="Area2D" parent="GameController"]
 script = ExtResource("1_ljc02")
 
-[node name="Zona3" type="ColorRect" parent="GameController"]
-offset_left = 600.0
-offset_right = 900.0
-offset_bottom = 300.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona2"]
+position = Vector2(453.5, 151)
+shape = SubResource("RectangleShape2D_aosd4")
+
+[node name="Zona3" type="Area2D" parent="GameController"]
 script = ExtResource("1_ljc02")
 
-[node name="Zona4" type="ColorRect" parent="GameController"]
-offset_top = 300.0
-offset_right = 300.0
-offset_bottom = 600.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona3"]
+position = Vector2(757.5, 151)
+shape = SubResource("RectangleShape2D_aosd4")
+
+[node name="Zona4" type="Area2D" parent="GameController"]
 script = ExtResource("1_ljc02")
 
-[node name="Zona5" type="ColorRect" parent="GameController"]
-offset_left = 300.0
-offset_top = 300.0
-offset_right = 600.0
-offset_bottom = 600.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona4"]
+position = Vector2(149.5, 455)
+shape = SubResource("RectangleShape2D_aosd4")
+
+[node name="Zona5" type="Area2D" parent="GameController"]
 script = ExtResource("1_ljc02")
 
-[node name="Zona6" type="ColorRect" parent="GameController"]
-offset_left = 600.0
-offset_top = 300.0
-offset_right = 900.0
-offset_bottom = 600.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona5"]
+position = Vector2(453.5, 455)
+shape = SubResource("RectangleShape2D_aosd4")
+
+[node name="Zona6" type="Area2D" parent="GameController"]
 script = ExtResource("1_ljc02")
 
-[node name="Zona7" type="ColorRect" parent="GameController"]
-offset_top = 600.0
-offset_right = 300.0
-offset_bottom = 900.0
-script = ExtResource("1_ljc02")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona6"]
+position = Vector2(759, 451)
+shape = SubResource("RectangleShape2D_aosd4")
 
-[node name="Zona8" type="ColorRect" parent="GameController"]
-offset_left = 300.0
-offset_top = 600.0
-offset_right = 600.0
-offset_bottom = 900.0
-script = ExtResource("1_ljc02")
+[node name="bola" type="CharacterBody2D" parent="."]
+position = Vector2(-92, 96)
+script = ExtResource("3_opcuk")
+metadata/_edit_group_ = true
 
-[node name="Zona9" type="ColorRect" parent="GameController"]
-offset_left = 600.0
-offset_top = 600.0
-offset_right = 900.0
-offset_bottom = 900.0
-script = ExtResource("1_ljc02")
+[node name="Sprite2D" type="Sprite2D" parent="bola"]
+position = Vector2(0, 7.62939e-06)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("4_xq5yl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bola"]
+shape = SubResource("RectangleShape2D_rn4r2")

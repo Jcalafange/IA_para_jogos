@@ -14,13 +14,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Atualiza a cor das zonas ativas
 	for zone in active_zones:
-		zone.update_color(delta, 1.0)  # Chama a função de mudança de cor
+		if zone.has_method("update_color"):
+			zone.update_color(delta, 1.0)  # Chama a função de mudança de cor
 
-	# Timer para trocar a zona ativa
-	timer += delta
-	if timer >= SWITCH_INTERVAL:
-		timer = 0.0  # Reseta o timer
-		switch_zone()
 
 func switch_zone() -> void:
 	if active_zones.size() > 0:
