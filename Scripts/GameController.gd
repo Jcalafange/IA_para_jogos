@@ -14,7 +14,6 @@ func _ready() -> void:
 			if(ball.position.x > zone.position.x and ball.position.x < (zone.position.x + zone.size.x) and ball.position.y > zone.position.y and ball.position.y < (zone.position.y + zone.size.y)):
 				zone.balls_in_zone.append(ball)
 
-
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		for zone in all_zones:
