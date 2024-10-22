@@ -1,8 +1,9 @@
 extends Area2D  # Agora herda de Area2D, e não mais de ColorRect
 
 var original_color: Color
-var target_color: Color = Color(0, 1, 0)  # Cor alvo (verde)
-var is_active: bool = false
+
+var target_color: Color = Color(0, 1, 0)  # Cor alvo (ex: vermelho)
+var balls_in_zone = []
 
 func _ready():
 	original_color = modulate  # Armazena a cor original
@@ -23,11 +24,11 @@ func _on_body_exited(body):
 func update_color(delta: float, speed: float) -> void:
 	var time = Time.get_ticks_msec() / 1000.0  # Converte milissegundos para segundos
 	var t = sin(time * speed) * 0.5 + 0.5  # Normaliza t entre 0 e 1
-	modulate = original_color.lerp(target_color, t)  # Usando lerp para suavizar a transição
+	modulate = original_color.lerp(target_color, t)  # Usando lerp
 
-func set_active(active: bool) -> void:
-	is_active = active
-	if is_active:
-		modulate = target_color  # Muda para a cor alvo
-	else:
-		modulate = original_color  # Retorna à cor original
+func is_inside_zone(position: Vector2) -> bool:
+	return position.x >= self.position.x and position.x <= self.position.x + self.size.x and position.y >= self.position.y and position.y <= self.position.y + self.size.y
+
+func move_balls() -> void:
+	for ball in balls_in_zone:
+		ball.move((self.position.x + 25), (self.position.x + 275))
