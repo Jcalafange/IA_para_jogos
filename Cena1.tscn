@@ -61,7 +61,7 @@ position = Vector2(222, 222)
 position = Vector2(84, 93)
 
 [node name="ball4" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(460, 155)
+position = Vector2(544, 120)
 
 [node name="ball5" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(760, 155)
@@ -76,10 +76,40 @@ position = Vector2(760, 455)
 position = Vector2(460, 455)
 
 [node name="ball9" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(160, 755)
+position = Vector2(216, 840)
 
 [node name="ball10" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(460, 755)
+position = Vector2(520, 696)
 
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(760, 755)
+position = Vector2(752, 840)
+
+[node name="ball12" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(480, 232)
+
+[node name="ball13" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(384, 384)
+
+[node name="ball14" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(840, 392)
+
+[node name="ball15" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(832, 80)
+
+[node name="ball16" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(144, 536)
+
+[node name="ball17" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(832, 688)
+
+[node name="ball18" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(72, 680)
+
+[node name="ball19" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(72, 776)
+
+[node name="ball20" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(520, 840)
+
+[node name="ball21" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(299, 704)
