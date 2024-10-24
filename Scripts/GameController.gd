@@ -9,28 +9,28 @@ func _ready() -> void:
 	all_zones = get_tree().get_nodes_in_group("Zonas")
 	all_balls = get_tree().get_nodes_in_group("Balls")
 	set_process_input(true)
-	for ball in all_balls:
-		for zone in all_zones:
-			if(ball.position.x > zone.position.x and ball.position.x < (zone.position.x + zone.size.x) and ball.position.y > zone.position.y and ball.position.y < (zone.position.y + zone.size.y)):
-				zone.balls_in_zone.append(ball)
-
-func _input(event):
-	if event is InputEventMouseButton and event.pressed:
-		for zone in all_zones:
-			if zone.is_inside_zone(get_viewport().get_mouse_position()):
-				toggle_zone(zone)
+	# Conecta os sinais de cada zona
+		
+	set_process_input(true)
 
 # Função para ativar/desativar zonas
-func toggle_zone(zone: ColorRect):
+func toggle_zone(zone: Area2D):
 	if zone in active_zones:
 		active_zones.erase(zone)
-		zone.modulate = Color(1, 1, 1)
+		zone.get_node("ColorRect").modulate = Color(1, 1, 1)  # Desativar (cor branca)
 	else:
 		active_zones.append(zone)
-		zone.modulate = Color(0, 1, 0) # Verde para zona ativa
+		zone.get_node("ColorRect").modulate = Color(0, 1, 0)  # Ativar (cor verde)
 
-# Atualiza as zonas ativas e suas bolas
+# Quando uma bola entra em uma zona
+func _on_ball_entered_zone(ball, zone):
+	print("Bola entrou na zona: ", ball, " Zona: ", zone)
+
+# Quando uma bola sai de uma zona
+func _on_ball_exited_zone(ball, zone):
+	print("Bola saiu da zona: ", ball, " Zona: ", zone)
+
+# Atualiza as zonas ativas e movimenta as bolas
 func _process(delta):
 	for zone in active_zones:
-		zone.update_color(delta, 5)
-		zone.move_balls()
+		zone.move_balls()  # Função customizada para mover bolas dentro da zona

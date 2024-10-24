@@ -34,9 +34,9 @@ func check_zone_collision() -> void:
 
 				# Verifica se a posição da bola está dentro dos limites do retângulo
 				if self.global_position.x > zone_position.x - rect_size.x / 2 and \
-				   self.global_position.x < zone_position.x + rect_size.x / 2 and \
-				   self.global_position.y > zone_position.y - rect_size.y / 2 and \
-				   self.global_position.y < zone_position.y + rect_size.y / 2:
+					self.global_position.x < zone_position.x + rect_size.x / 2 and \
+					self.global_position.y > zone_position.y - rect_size.y / 2 and \
+					self.global_position.y < zone_position.y + rect_size.y / 2:
 					zone.set_active(true)
 				else:
 					zone.set_active(false)

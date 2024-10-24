@@ -1,103 +1,44 @@
 [gd_scene load_steps=7 format=3 uid="uid://dvkx8053yek68"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
-[ext_resource type="Script" path="res://Scripts/ZoneController.gd" id="1_ljc02"]
+[ext_resource type="PackedScene" uid="uid://c46y1mpjb84cc" path="res://scenes/zonas/Zone.tscn" id="2_ibn4e"]
+[ext_resource type="PackedScene" uid="uid://c7yjtaywdoswx" path="res://scenes/ball/ball.tscn" id="3_glsyj"]
 [ext_resource type="Script" path="res://Scripts/bola.gd" id="3_opcuk"]
-[ext_resource type="PackedScene" uid="uid://q8xmtsvy43sd" path="res://scenes/zonas/zona.tscn" id="2_dfa8g"]
-[ext_resource type="PackedScene" uid="uid://c7yjtaywdoswx" path="res://scenes/ball/ball.tscn" id="3_glsyj"]
 [ext_resource type="Texture2D" uid="uid://cflhx2ul21p2t" path="res://icon.svg" id="4_xq5yl"]
-[ext_resource type="PackedScene" uid="uid://c7yjtaywdoswx" path="res://scenes/ball/ball.tscn" id="3_glsyj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aosd4"]
-size = Vector2(303, 300)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rn4r2"]
 size = Vector2(52, 52)
-
 
 [node name="Node2D" type="Node2D"]
 
 [node name="GameController" type="Node2D" parent="."]
 script = ExtResource("1_k3llr")
 
-[node name="Zona" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
+[node name="Zone" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona1"]
-position = Vector2(150.5, 151)
-shape = SubResource("RectangleShape2D_aosd4")
+[node name="Zone2" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(300, 0)
 
-[node name="Zona2" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_left = 300.0
-offset_right = 600.0
+[node name="Zone3" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(600, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona2"]
-position = Vector2(453.5, 151)
-shape = SubResource("RectangleShape2D_aosd4")
+[node name="Zone4" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(0, 300)
 
-[node name="Zona3" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_left = 600.0
-offset_right = 900.0
+[node name="Zone5" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(300, 300)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona3"]
-position = Vector2(757.5, 151)
-shape = SubResource("RectangleShape2D_aosd4")
+[node name="Zone6" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(600, 300)
 
-[node name="Zona4" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_top = 300.0
-offset_bottom = 600.0
+[node name="Zone7" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(0, 600)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona4"]
-position = Vector2(149.5, 455)
-shape = SubResource("RectangleShape2D_aosd4")
+[node name="Zone8" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(300, 600)
 
-[node name="Zona5" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_left = 300.0
-offset_top = 300.0
-offset_right = 600.0
-offset_bottom = 600.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona5"]
-position = Vector2(453.5, 455)
-shape = SubResource("RectangleShape2D_aosd4")
-
-[node name="Zona6" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_left = 600.0
-offset_top = 300.0
-offset_right = 900.0
-offset_bottom = 600.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zona6"]
-position = Vector2(759, 451)
-shape = SubResource("RectangleShape2D_aosd4")
-
-[node name="Zona7" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_top = 600.0
-offset_bottom = 900.0
-
-[node name="Zona8" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_left = 300.0
-offset_top = 600.0
-offset_right = 600.0
-offset_bottom = 900.0
-
-[node name="Zona9" parent="GameController" groups=["Zonas"] instance=ExtResource("2_dfa8g")]
-offset_left = 600.0
-offset_top = 600.0
-offset_right = 900.0
-offset_bottom = 900.0
-
-[node name="bola" type="CharacterBody2D" parent="."]
-position = Vector2(-92, 96)
-script = ExtResource("3_opcuk")
-metadata/_edit_group_ = true
-
-[node name="Sprite2D" type="Sprite2D" parent="bola"]
-position = Vector2(0, 7.62939e-06)
-scale = Vector2(0.40625, 0.40625)
-texture = ExtResource("4_xq5yl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bola"]
-shape = SubResource("RectangleShape2D_rn4r2")
+[node name="Zone9" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+position = Vector2(600, 600)
 
 [node name="ball" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(160, 155)
@@ -131,3 +72,16 @@ position = Vector2(460, 755)
 
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(760, 755)
+
+[node name="bola" type="CharacterBody2D" parent="."]
+position = Vector2(240, 128)
+script = ExtResource("3_opcuk")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="bola"]
+position = Vector2(0, 7.62939e-06)
+scale = Vector2(0.40625, 0.40625)
+texture = ExtResource("4_xq5yl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bola"]
+shape = SubResource("RectangleShape2D_rn4r2")
