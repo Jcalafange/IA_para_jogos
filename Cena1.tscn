@@ -73,7 +73,7 @@ position = Vector2(460, 755)
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(760, 755)
 
-[node name="bola" type="CharacterBody2D" parent="."]
+[node name="bola" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(240, 128)
 script = ExtResource("3_opcuk")
 metadata/_edit_group_ = true

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @export var speed: float = 200.0  # Velocidade da bola
+signal entered_zone(zone)
+signal exited_zone(zone)
 
 func _physics_process(delta: float) -> void:
 	# Reseta a velocidade do corpo a cada frame
@@ -38,7 +40,9 @@ func check_zone_collision() -> void:
 					self.global_position.y > zone_position.y - rect_size.y / 2 and \
 					self.global_position.y < zone_position.y + rect_size.y / 2:
 					zone.set_active(true)
+					GameController.toggle_zone(zone)
 				else:
 					zone.set_active(false)
+					GameController.toggle_zone(zone)
 		else:
 			print("Aviso: Zona '%s' não possui um CollisionShape2D." % zone.name)

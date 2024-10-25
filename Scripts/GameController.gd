@@ -5,12 +5,11 @@ extends Node
 @export var current_zone_index: int = 0
 var all_balls: Array = []
 
+
 func _ready() -> void:
 	all_zones = get_tree().get_nodes_in_group("Zonas")
 	all_balls = get_tree().get_nodes_in_group("Balls")
-	set_process_input(true)
-	# Conecta os sinais de cada zona
-		
+	distribuir_balls()
 	set_process_input(true)
 
 # Função para ativar/desativar zonas
@@ -22,15 +21,16 @@ func toggle_zone(zone: Area2D):
 		active_zones.append(zone)
 		zone.get_node("ColorRect").modulate = Color(0, 1, 0)  # Ativar (cor verde)
 
-# Quando uma bola entra em uma zona
-func _on_ball_entered_zone(ball, zone):
-	print("Bola entrou na zona: ", ball, " Zona: ", zone)
+func zone_movement(zone: Area2D):
+	toggle_zone(zone)
 
-# Quando uma bola sai de uma zona
-func _on_ball_exited_zone(ball, zone):
-	print("Bola saiu da zona: ", ball, " Zona: ", zone)
-
+func distribuir_balls():
+	for zone in all_zones:
+		for ball in all_balls:
+			if (zone.is_inside_zone(ball)):
+				zone.balls_in_zone.append(ball)
 # Atualiza as zonas ativas e movimenta as bolas
 func _process(delta):
+	#print(active_zones)
 	for zone in active_zones:
 		zone.move_balls()  # Função customizada para mover bolas dentro da zona
