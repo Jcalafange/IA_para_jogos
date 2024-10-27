@@ -33,4 +33,4 @@ func distribuir_balls():
 func _process(delta):
 	#print(active_zones)
 	for zone in active_zones:
-		zone.move_balls()  # Função customizada para mover bolas dentro da zona
+		zone.move_balls(delta)  # Função customizada para mover bolas dentro da zona
