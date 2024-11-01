@@ -9,7 +9,7 @@ func _ready():
 	player = get_node("/root/Node2D/player")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func move(delta):
 	if player:  # Verifica se o jogador foi atribuído corretamente
 		move_towards_player(delta)
 
