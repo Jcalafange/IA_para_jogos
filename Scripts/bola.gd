@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
 @export var speed: float = 200.0  # Velocidade da bola
-signal entered_zone(zone)
-signal exited_zone(zone)
+@export var maxLife: float = 100.0
+@export var currentLife: float = 0.0 
+@export var dano: float = 15.0
+var can_shoot : bool = true
+
+signal shoot
 
 func _physics_process(delta: float) -> void:
 	# Reseta a velocidade do corpo a cada frame
@@ -17,6 +21,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y += speed
 	elif Input.is_action_pressed("ui_up"):
 		velocity.y -= speed
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
+		var dir = get_global_mouse_position() - position
+		shoot.emit(position, dir)
+		can_shoot = false
+		$ShootTimer.start()
 
 	# Move a bola usando move_and_slide()
 	if velocity.length() > 0:
@@ -46,3 +55,7 @@ func check_zone_collision() -> void:
 					GameController.toggle_zone(zone)
 		else:
 			print("Aviso: Zona '%s' não possui um CollisionShape2D." % zone.name)
+
+
+func _on_shoot_timer_timeout():
+	can_shoot = true # Replace with function body.
