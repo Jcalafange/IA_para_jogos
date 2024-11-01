@@ -4,12 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://d07slgxm0w723" path="res://sprints/path1.png" id="1_jsisk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jflof"]
-radius = 29.1548
+radius = 15.0
 
 [node name="ball" type="Area2D"]
 script = ExtResource("1_f152p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_jsisk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

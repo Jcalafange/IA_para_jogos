@@ -10,6 +10,7 @@ func _ready() -> void:
 	all_zones = get_tree().get_nodes_in_group("Zonas")
 	all_balls = get_tree().get_nodes_in_group("Balls")
 	distribuir_balls()
+	connect_signals()
 	set_process_input(true)
 
 # Função para ativar/desativar zonas
@@ -34,3 +35,12 @@ func _process(delta):
 	#print(active_zones)
 	for zone in active_zones:
 		zone.move_balls()  # Função customizada para mover bolas dentro da zona
+
+func _on_ball_destructed(ball: ballController) -> void:
+	all_balls.erase(ball)
+	for zone in all_zones:
+		zone.balls_in_zone.erase(ball)
+
+func connect_signals():
+	for ball in all_balls:
+		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))

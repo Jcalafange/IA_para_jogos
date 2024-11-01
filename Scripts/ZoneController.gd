@@ -12,6 +12,9 @@ func _ready():
 	add_to_group("Zonas")  # Adiciona a zona ao grupo "Zonas"
 	connect("body_entered", Callable(self, "_on_body_entered"))  # Usando Callable
 	connect("body_exited", Callable(self, "_on_body_exited"))  # Usando Callable
+	
+	for ball in balls_in_zone:
+		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))
 
 func _on_body_entered(body):
 	if body is CharacterBody2D:
@@ -40,3 +43,6 @@ func is_inside_zone(area: Area2D) -> bool:
 func move_balls() -> void:
 	for ball in balls_in_zone:
 		ball.move((self.position.x + 25), (self.position.x + 275))
+
+func _on_ball_destructed(ball: ballController) -> void:
+	balls_in_zone.erase(ball)

@@ -15,3 +15,6 @@ texture = ExtResource("1_ljfus")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_srgae")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+one_shot = true

@@ -8,6 +8,9 @@ var can_shoot : bool = true
 
 signal shoot
 
+func _ready():
+	currentLife = maxLife
+
 func _physics_process(delta: float) -> void:
 	# Reseta a velocidade do corpo a cada frame
 	velocity = Vector2.ZERO
@@ -34,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 	# Checa colisão com zonas
 	check_zone_collision()
+	check_enemy_collision()
 
 func check_zone_collision() -> void:
 	for zone in get_tree().get_nodes_in_group("zones"):
@@ -56,6 +60,20 @@ func check_zone_collision() -> void:
 		else:
 			print("Aviso: Zona '%s' não possui um CollisionShape2D." % zone.name)
 
+func check_enemy_collision() -> void:
+	for enemy in get_tree().get_nodes_in_group("Balls"):
+		if enemy.has_node("CollisionShape2D"):
+			var collision_shape = enemy.get_node("CollisionShape2D") as CollisionShape2D
+			if collision_shape and collision_shape.shape is CircleShape2D:
+			# Verifica se a posição da bola está dentro do raio do inimigo
+				if position.distance_to(enemy.position) < collision_shape.shape.radius:
+					# Aplica dano ao jogador
+					currentLife -= 2
+					print(currentLife)
+					if currentLife <= 0:
+						currentLife = 0
+						print("Game Over")  # Chama a função para reiniciar o jogo
+					break  # Sai do loop após a colisão
 
 func _on_shoot_timer_timeout():
 	can_shoot = true # Replace with function body.
