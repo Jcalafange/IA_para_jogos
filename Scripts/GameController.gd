@@ -10,6 +10,7 @@ func _ready() -> void:
 	all_zones = get_tree().get_nodes_in_group("Zonas")
 	all_balls = get_tree().get_nodes_in_group("Balls")
 	distribuir_balls()
+	connect_signals()
 	set_process_input(true)
 
 # Função para ativar/desativar zonas
