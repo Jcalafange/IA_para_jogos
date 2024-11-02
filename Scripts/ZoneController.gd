@@ -47,11 +47,10 @@ func is_inside_zone(area: Area2D) -> bool:
 
 func move_balls(delta: float) -> void:
 	for ball in balls_in_zone:
-		ball.move((self.position.x + 25), (self.position.x + 275))
+		if player:  # Verifica se o jogador foi atribuído corretamente
+			var direction = (player.position - ball.position).normalized()  # Calcula a direção para o jogador
+			ball.position += direction * ball.velocity * delta  # Move a bola em direção ao jogador
 
 func _on_ball_destructed(ball: ballController) -> void:
 	balls_in_zone.erase(ball)
 
-		if player:  # Verifica se o jogador foi atribuído corretamente
-			var direction = (player.position - ball.position).normalized()  # Calcula a direção para o jogador
-			ball.position += direction * ball.velocity * delta  # Move a bola em direção ao jogador

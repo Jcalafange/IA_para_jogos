@@ -1,7 +1,7 @@
 extends Area2D
 
 var direction : Vector2
-var speed : int = 350
+var speed : int = 250
 var damage : float = 15.0
 @export var lifetime: float = 0.5
 
@@ -11,7 +11,7 @@ func _ready():
 	$LifetimeTimer.connect("timeout", Callable(self, "_on_LifetimeTimer_timeout"))
 
 func _on_LifetimeTimer_timeout():
-	print("desstruit bala")
+	print("desstruir bala")
 	queue_free()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

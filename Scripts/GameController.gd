@@ -35,3 +35,12 @@ func _process(delta):
 	#print(active_zones)
 	for zone in active_zones:
 		zone.move_balls(delta)  # Função customizada para mover bolas dentro da zona
+
+func _on_ball_destructed(ball: ballController) -> void:
+	all_balls.erase(ball)
+	for zone in all_zones:
+		zone.balls_in_zone.erase(ball)
+
+func connect_signals():
+	for ball in all_balls:
+		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))

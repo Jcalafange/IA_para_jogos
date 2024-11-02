@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var maxLife: float = 100.0
 @export var currentLife: float = 0.0 
 @export var dano: float = 15.0
+
 var can_shoot : bool = true
 
 signal shoot
@@ -25,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("move_up"):
 		velocity.y -= speed
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
+		print('Disparar')
 		var dir = get_global_mouse_position() - position
 		shoot.emit(position, dir)
 		can_shoot = false
@@ -77,3 +79,7 @@ func check_enemy_collision() -> void:
 
 func _on_shoot_timer_timeout():
 	can_shoot = true # Replace with function body.
+
+
+
+

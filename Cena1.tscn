@@ -88,11 +88,14 @@ texture = ExtResource("4_xq5yl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 shape = SubResource("RectangleShape2D_rn4r2")
 
-[node name="ShootTimer" type="Timer" parent="bola"]
+[node name="ShootTimer" type="Timer" parent="player"]
 
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("6_gvfge")
 bullet_scene = ExtResource("7_v4s5h")
 
-[connection signal="shoot" from="bola" to="BulletManager" method="_on_bola_shoot"]
-[connection signal="timeout" from="bola/ShootTimer" to="bola" method="_on_shoot_timer_timeout"]
+[node name="Bullet" parent="." instance=ExtResource("7_v4s5h")]
+position = Vector2(416, 256)
+
+[connection signal="shoot" from="player" to="BulletManager" method="_on_player_shoot"]
+[connection signal="timeout" from="player/ShootTimer" to="player" method="_on_shoot_timer_timeout"]
