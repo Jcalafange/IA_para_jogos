@@ -75,17 +75,17 @@ position = Vector2(460, 755)
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(760, 755)
 
-[node name="bola" type="CharacterBody2D" parent="." groups=["Player"]]
+[node name="player" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(240, 128)
 script = ExtResource("3_opcuk")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="bola"]
+[node name="Sprite2D" type="Sprite2D" parent="player"]
 position = Vector2(0, 7.62939e-06)
 scale = Vector2(0.40625, 0.40625)
 texture = ExtResource("4_xq5yl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bola"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 shape = SubResource("RectangleShape2D_rn4r2")
 
 [node name="ShootTimer" type="Timer" parent="bola"]
