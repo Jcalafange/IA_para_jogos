@@ -8,6 +8,7 @@ extends CharacterBody2D
 var can_shoot : bool = true
 
 signal shoot
+signal StatusChange
 
 func _ready():
 	currentLife = maxLife
@@ -72,6 +73,7 @@ func check_enemy_collision() -> void:
 					# Aplica dano ao jogador
 					currentLife -= 2
 					print(currentLife)
+					StatusChange.emit(currentLife)
 					if currentLife <= 0:
 						currentLife = 0
 						print("Game Over")  # Chama a função para reiniciar o jogo

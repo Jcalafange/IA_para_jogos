@@ -3,6 +3,7 @@ extends Node
 @export var all_zones: Array = []
 @export var active_zones: Array = []
 @export var current_zone_index: int = 0
+@export var hpBar: ColorRect
 var all_balls: Array = []
 
 
@@ -44,3 +45,7 @@ func _on_ball_destructed(ball: ballController) -> void:
 func connect_signals():
 	for ball in all_balls:
 		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))
+
+
+func _on_player_status_change(currentLife):
+	hpBar.size.x = (currentLife/100.0) * hpBar.size.x # Replace with function body.
