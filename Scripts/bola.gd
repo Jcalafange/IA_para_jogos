@@ -82,6 +82,14 @@ func check_enemy_collision() -> void:
 func _on_shoot_timer_timeout():
 	can_shoot = true # Replace with function body.
 
+# Função para aumentar a velocidade ao coletar o power-up
+func increase_speed():
+	speed += 50  # Aumenta a velocidade
+	print("Velocidade aumentada para:", speed)
 
+# Função para conectar o power-up ao jogador
+func connect_power_up(power_up):
+	power_up.connect("collected", Callable(self, "increase_speed"))
+ 
 
 

@@ -74,7 +74,7 @@ position = Vector2(160, 755)
 position = Vector2(460, 755)
 
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(760, 755)
+position = Vector2(762, 761)
 
 [node name="HUD" type="CanvasLayer" parent="GameController"]
 
