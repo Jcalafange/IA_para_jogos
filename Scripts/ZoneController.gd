@@ -1,5 +1,7 @@
 extends Area2D  # Agora herda de Area2D, e não mais de ColorRect
 
+class_name ZonaController
+
 var original_color: Color
 var target_color: Color = Color(0, 1, 0)  # Cor alvo (ex: vermelho)
 var balls_in_zone = []
@@ -27,6 +29,7 @@ func _on_body_entered(body):
 		GameController.toggle_zone(self)
 		#set_active(true)
 
+
 func _on_body_exited(body):
 	if body is CharacterBody2D:
 		print("O player saiu da zona: ", self.name)  # Se a bola (jogador) saiu da zona
@@ -47,10 +50,8 @@ func is_inside_zone(area: Area2D) -> bool:
 
 func move_balls(delta: float) -> void:
 	for ball in balls_in_zone:
-		if player:  # Verifica se o jogador foi atribuído corretamente
-			var direction = (player.position - ball.position).normalized()  # Calcula a direção para o jogador
-			ball.position += direction * ball.velocity * delta  # Move a bola em direção ao jogador
+		if ball and is_instance_valid(ball):
+			ball.move(delta)
 
 func _on_ball_destructed(ball: ballController) -> void:
 	balls_in_zone.erase(ball)
-

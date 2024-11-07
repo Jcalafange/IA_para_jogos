@@ -45,7 +45,28 @@ func _on_ball_destructed(ball: ballController) -> void:
 func connect_signals():
 	for ball in all_balls:
 		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))
-
+		ball.connect("entered_zone", Callable(self, "_on_ball_entered_zone"))
+		ball.connect("exited_zone", Callable(self, "remove_ball_from_zone"))
 
 func _on_player_status_change(currentLife):
 	hpBar.size.x = (currentLife/100.0) * hpBar.size.x # Replace with function body.
+
+func add_ball_to_zone(zone: Area2D, ball: ballController) -> void:
+	# Adiciona a bola à lista de bolas da zona
+	if zone is ZonaController:
+		zone.balls_in_zone.append(ball)
+		print("Bola adicionada à zona: ", zone.name)
+
+# Função chamada quando uma bola entra em uma zona
+func _on_ball_entered_zone(zone: ZonaController, ball: ballController) -> void:
+	# Adiciona a bola à zona ativa
+	if zone not in active_zones:
+		#active_zones.append(zone)
+		zone.balls_in_zone.append(ball)  # Adiciona a bola à zona
+		print("Bola entrou na zona: ", zone.name)
+
+func remove_ball_from_zone(zone: Area2D, ball: ballController) -> void:
+	# Remove a bola da lista de bolas da zona
+	if zone is ZonaController:
+		zone.balls_in_zone.erase(ball)
+		print("Bola removida da zona: ", zone.name)
