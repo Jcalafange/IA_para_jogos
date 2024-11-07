@@ -14,6 +14,17 @@ func _ready() -> void:
 	connect_signals()
 	set_process_input(true)
 
+	var timer = Timer.new()
+	timer.wait_time = 10  # Spawn de power-up a cada 10 segundos
+	timer.one_shot = false
+	timer.connect("timeout", Callable(self, "_on_spawn_power_up_timer_timeout"))
+	add_child(timer)
+	timer.start()
+
+func _on_spawn_power_up_timer_timeout():
+	var random_position = Vector2(randf() * 800, randf() * 600)  # Define uma posição aleatória
+	spawn_power_up(random_position)
+	
 # Função para ativar/desativar zonas
 func toggle_zone(zone: Area2D):
 	if zone in active_zones:
@@ -46,6 +57,15 @@ func connect_signals():
 	for ball in all_balls:
 		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))
 
+func spawn_power_up(position: Vector2):
+	var power_up_scene = preload("res://scenes/PowerUp/PowerUp.tscn")  # Caminho para a cena do power-up
+	var power_up_instance = power_up_scene.instantiate()  # Instancia o power-up
+	add_child(power_up_instance)
+	power_up_instance.position = position  # Define a posição do power-up
+
+	# Conecta o power-up ao jogador
+	var player = get_tree().get_nodes_in_group("Player")[0]  # Supondo que o jogador está no grupo "Player"
+	player.connect_power_up(power_up_instance)
 
 func _on_player_status_change(currentLife):
 	hpBar.size.x = (currentLife/100.0) * hpBar.size.x # Replace with function body.

@@ -74,7 +74,7 @@ position = Vector2(160, 755)
 position = Vector2(460, 755)
 
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(760, 755)
+position = Vector2(762, 761)
 
 [node name="HUD" type="CanvasLayer" parent="GameController"]
 
@@ -86,6 +86,7 @@ offset_bottom = 20.0
 color = Color(0, 0, 0, 0.509804)
 
 [node name="Bar" type="ColorRect" parent="GameController/HUD/PlayerLife"]
+layout_mode = 0
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 99.0
