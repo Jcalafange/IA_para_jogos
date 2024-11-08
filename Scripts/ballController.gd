@@ -16,7 +16,7 @@ signal destruct_ball
 var player : Node2D
 
 var currentState: State = State.NORMAL 
-var fleeDistance: float = 5.0
+var fleeDistance: float = 200.0
 
 signal entered_zone(zone)  # Novo sinal para quando a bola entra em uma zona
 signal exited_zone(zone)   # Novo sinal para quando a bola sai de uma zona
@@ -86,5 +86,11 @@ func update_state():
 
 # Move o inimigo para longe do jogador (fuga)
 func move_away_from_player(delta):
-	var direction = (position - player.position).normalized()  # Direção para longe do jogador
-	position += direction * velocity * delta  # Move o inimigo para longe
+	var distance_to_player = position.distance_to(player.position)  # Calcula a distância atual até o jogador
+	print("Distancia do Player: ", distance_to_player)
+	if distance_to_player < fleeDistance:  # Se a distância for maior que a distância de fuga
+		var direction = (position - player.position).normalized()  # Direção para longe do jogador
+		position += direction * velocity * delta  # Move o inimigo para longe
+	else:
+		# Se a bola estiver a uma distância menor ou igual a fleeDistance, ela para
+		print("Distância de fuga alcançada, parado.")
