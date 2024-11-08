@@ -1,6 +1,6 @@
 extends Area2D  # Agora herda de Area2D, e não mais de ColorRect
 
-class_name ZonaController
+class_name ZoneController
 
 var original_color: Color
 var target_color: Color = Color(0, 1, 0)  # Cor alvo (ex: vermelho)

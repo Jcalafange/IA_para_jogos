@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2uf7t0e1c7ke"]
+
+[ext_resource type="Script" path="res://scenes/PowerUp/powerUPSpeed.gd" id="1_uf3g8"]
+[ext_resource type="Texture2D" uid="uid://dib48gsnt4s1p" path="res://sprints/yeallow_ball.png" id="2_8o41c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uoynv"]
+radius = 15.0
+
+[node name="PowerUp" type="Area2D"]
+position = Vector2(-12, -6)
+script = ExtResource("1_uf3g8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(12.7041, 5.74498)
+scale = Vector2(0.893491, 0.953439)
+texture = ExtResource("2_8o41c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(12.6705, 5.71387)
+shape = SubResource("CircleShape2D_uoynv")
