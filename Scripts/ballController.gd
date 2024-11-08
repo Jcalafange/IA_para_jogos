@@ -40,7 +40,7 @@ func _process(delta):
 	update_life_bar()
 
 func move(delta):
-	update_state()
+	#update_state()
 	match currentState:
 		State.NORMAL:
 			move_towards_player(delta)
@@ -51,6 +51,9 @@ func _on_bullet_body_entered(body):
 	if body.is_in_group("bullets"):
 		body.queue_free()
 		currentLife -= 30
+		if currentLife <= (maxLife * 0.3):  # Se a vida do inimigo for menor que 30%, ele entra no estado de fuga
+			if currentState != State.FLEEING:
+				currentState = State.FLEEING
 		if(currentLife <= 0):
 			emit_signal("destruct_ball", self)
 			queue_free()
