@@ -87,12 +87,7 @@ func remove_ball_from_zone(zone: Area2D, ball: ballController) -> void:
 		zone.balls_in_zone.erase(ball)
 		print("Bola removida da zona: ", zone.name)
 	#print_all_zones_and_balls()
-	
-func spawn_power_up(position: Vector2):
-	var power_up_scene = preload("res://scenes/PowerUp/PowerUp.tscn")  # Caminho para a cena do power-up
-	var power_up_instance = power_up_scene.instantiate()  # Instancia o power-up
 
-		
 func spawn_power_up(power_up_type: String, position: Vector2):
 	var power_up_scene
 	match power_up_type:
@@ -102,15 +97,13 @@ func spawn_power_up(power_up_type: String, position: Vector2):
 			power_up_scene = preload("res://scenes/PowerUP/PowerUpSpeed.tscn")
 		"speed_atk":
 			power_up_scene = preload("res://scenes/PowerUP/PowerUpSpeedATK.tscn")
-
 	var power_up_instance = power_up_scene.instantiate()
 	add_child(power_up_instance)
 	power_up_instance.position = position
-
 	# Conecta o power-up ao jogador
 	var player = get_tree().get_nodes_in_group("Player")[0]  # Supondo que o jogador está no grupo "Player"
-	player.connect_power_up(power_up_instance)
-  match power_up_type:
+	#player.connect_power_dsup(power_up_instance)
+	match power_up_type:
 		"heal":
 			player.connect_power_up_heal(power_up_instance)
 		"speed":
