@@ -3,12 +3,20 @@ extends Area2D
 
 class_name ballController
 
-var velocity : float = 25.0
+enum State {
+	NORMAL,
+	FLEEING
+}
+
+var velocity : float = 15.0
 var direction : int = 1
 var maxLife: float = 100.0
 var currentLife: float = 0.0
 signal destruct_ball
 var player : Node2D
+
+var currentState: State = State.NORMAL 
+var fleeDistance: float = 5.0
 
 signal entered_zone(zone)  # Novo sinal para quando a bola entra em uma zona
 signal exited_zone(zone)   # Novo sinal para quando a bola sai de uma zona
@@ -25,13 +33,19 @@ func _ready():
 	
 	hpBar = $Hp  
 	lifeBar = hpBar.get_node("Bar")
+	
+	currentState = State.NORMAL
 
 func _process(delta):
 	update_life_bar()
 
 func move(delta):
-	if player:  # Verifica se o jogador foi atribuído corretamente
-		move_towards_player(delta)
+	update_state()
+	match currentState:
+		State.NORMAL:
+			move_towards_player(delta)
+		State.FLEEING:
+			move_away_from_player(delta)
 
 func _on_bullet_body_entered(body):
 	if body.is_in_group("bullets"):
@@ -60,3 +74,18 @@ func update_life_bar():
 		var life_percentage = currentLife / maxLife
 		
 		lifeBar.size.x = hpBar.size.x * life_percentage
+
+func update_state():
+	if currentLife <= (maxLife * 0.3):  # Se a vida do inimigo for menor que 30%, ele entra no estado de fuga
+		if currentState != State.FLEEING:
+			currentState = State.FLEEING
+			print("Entrando no estado de fuga")
+	else:
+		if currentState != State.NORMAL:
+			currentState = State.NORMAL
+			print("Voltando ao estado normal")
+
+# Move o inimigo para longe do jogador (fuga)
+func move_away_from_player(delta):
+	var direction = (position - player.position).normalized()  # Direção para longe do jogador
+	position += direction * velocity * delta  # Move o inimigo para longe

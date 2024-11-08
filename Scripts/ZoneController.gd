@@ -49,9 +49,16 @@ func is_inside_zone(area: Area2D) -> bool:
 	return position.x >= self.position.x and position.x <= self.position.x + zone_size.x and position.y >= self.position.y and position.y <= self.position.y + zone_size.y
 
 func move_balls(delta: float) -> void:
+	var bounds = get_zone_bounds()
 	for ball in balls_in_zone:
 		if ball and is_instance_valid(ball):
 			ball.move(delta)
 
 func _on_ball_destructed(ball: ballController) -> void:
 	balls_in_zone.erase(ball)
+
+func get_zone_bounds() -> Rect2:
+	var collision_shape = $CollisionShape2D.shape
+	var zone_size = Vector2(collision_shape.extents.x * 2, collision_shape.extents.y * 2)
+	var zone_position = position - zone_size / 2
+	return Rect2(zone_position, zone_size)
