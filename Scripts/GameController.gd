@@ -25,7 +25,15 @@ func _ready() -> void:
 
 func _on_spawn_power_up_timer_timeout():
 	var random_position = Vector2(randf() * 800, randf() * 600)  # Define uma posição aleatória
-	spawn_power_up(random_position)
+
+	# Lista de tipos de power-up
+	var power_up_types = ["heal", "speed", "speed_atk"]
+
+	# Escolhe um tipo aleatório
+	var random_type = power_up_types[randi() % power_up_types.size()]
+
+	# Chama spawn_power_up com o tipo aleatório e posição aleatória
+	spawn_power_up(random_type, random_position)
 
 # Função para ativar/desativar zonas
 func toggle_zone(zone: Area2D):
@@ -65,7 +73,7 @@ func _on_player_status_change(currentLife):
 	hpBar.size.x = (currentLife/100.0) * hpBar.size.x # Replace with function body.
 
 # Função chamada quando uma bola entra em uma zona
-func _on_ball_entered_zone(zone: ZonaController, ball: ballController) -> void:
+func _on_ball_entered_zone(zone: ZoneController, ball: ballController) -> void:
 	# Adiciona a bola à zona ativa
 	if zone not in active_zones:
 		#active_zones.append(zone)
@@ -75,20 +83,40 @@ func _on_ball_entered_zone(zone: ZonaController, ball: ballController) -> void:
 
 func remove_ball_from_zone(zone: Area2D, ball: ballController) -> void:
 	# Remove a bola da lista de bolas da zona
-	if zone is ZonaController:
+	if zone is ZoneController:
 		zone.balls_in_zone.erase(ball)
 		print("Bola removida da zona: ", zone.name)
-	print_all_zones_and_balls()
+	#print_all_zones_and_balls()
 	
 func spawn_power_up(position: Vector2):
 	var power_up_scene = preload("res://scenes/PowerUp/PowerUp.tscn")  # Caminho para a cena do power-up
 	var power_up_instance = power_up_scene.instantiate()  # Instancia o power-up
+
+		
+func spawn_power_up(power_up_type: String, position: Vector2):
+	var power_up_scene
+	match power_up_type:
+		"heal":
+			power_up_scene = preload("res://scenes/PowerUP/PowerUpHeal.tscn")
+		"speed":
+			power_up_scene = preload("res://scenes/PowerUP/PowerUpSpeed.tscn")
+		"speed_atk":
+			power_up_scene = preload("res://scenes/PowerUP/PowerUpSpeedATK.tscn")
+
+	var power_up_instance = power_up_scene.instantiate()
 	add_child(power_up_instance)
-	power_up_instance.position = position  # Define a posição do power-up
+	power_up_instance.position = position
 
 	# Conecta o power-up ao jogador
 	var player = get_tree().get_nodes_in_group("Player")[0]  # Supondo que o jogador está no grupo "Player"
 	player.connect_power_up(power_up_instance)
+  match power_up_type:
+		"heal":
+			player.connect_power_up_heal(power_up_instance)
+		"speed":
+			player.connect_power_up_speed(power_up_instance)
+		"speed_atk":
+			player.connect_power_up_speed_atk(power_up_instance)
 
 func print_all_zones_and_balls() -> void:
 	for zone in all_zones:
@@ -98,3 +126,4 @@ func print_all_zones_and_balls() -> void:
 			ball_names.append(ball.name)
 		# Imprime o nome da zona e suas bolas
 		print(zone.name + ": " + str(ball_names))
+

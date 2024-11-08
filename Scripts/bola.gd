@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var speed: float = 200.0  # Velocidade da bola
 @export var maxLife: float = 100.0
 @export var currentLife: float = 0.0 
-@export var dano: float = 15.0
+@export var dano: float = 30.0
 
 var can_shoot : bool = true
 
@@ -82,14 +82,24 @@ func check_enemy_collision() -> void:
 func _on_shoot_timer_timeout():
 	can_shoot = true # Replace with function body.
 
-# Função para aumentar a velocidade ao coletar o power-up
+func connect_power_up_heal(power_up):
+	power_up.connect("collected", Callable(self, "increase_health"))
+
+func increase_health():
+	currentLife = min(currentLife + 20, maxLife)  # Aumenta a vida em 20, mas não ultrapassa maxLife
+	print("Vida aumentada! Vida atual:", currentLife)
+
+func connect_power_up_speed(power_up):
+	power_up.connect("collected", Callable(self, "increase_speed"))
+
 func increase_speed():
-	speed += 50  # Aumenta a velocidade
+	speed += 50  # Aumenta a velocidade do jogador
 	print("Velocidade aumentada para:", speed)
 
-# Função para conectar o power-up ao jogador
-func connect_power_up(power_up):
-	power_up.connect("collected", Callable(self, "increase_speed"))
- 
+func connect_power_up_speed_atk(power_up):
+	power_up.connect("collected", Callable(self, "increase_attack_speed"))
 
-
+func increase_attack_speed():
+	# Aumenta a velocidade de ataque do jogador
+	$ShootTimer.wait_time -= 0.2  # Diminui o tempo entre ataques (aumentando a velocidade de ataque)
+	print("Velocidade de ataque aumentada! Novo tempo de ataque:", $ShootTimer.wait_time)
