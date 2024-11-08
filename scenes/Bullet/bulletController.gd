@@ -2,7 +2,7 @@ extends Area2D
 
 var direction : Vector2
 var speed : int = 250
-var damage : float = 15.0
+var damage : float = 30.0
 @export var lifetime: float = 0.5
 
 # Called when the node enters the scene tree for the first time.
