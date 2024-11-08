@@ -87,6 +87,7 @@ func connect_power_up_heal(power_up):
 
 func increase_health():
 	currentLife = min(currentLife + 20, maxLife)  # Aumenta a vida em 20, mas não ultrapassa maxLife
+	StatusChange.emit(currentLife)
 	print("Vida aumentada! Vida atual:", currentLife)
 
 func connect_power_up_speed(power_up):

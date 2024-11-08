@@ -70,7 +70,7 @@ func connect_signals():
 		ball.connect("exited_zone", Callable(self, "remove_ball_from_zone"))
 
 func _on_player_status_change(currentLife):
-	hpBar.size.x = (currentLife/100.0) * hpBar.size.x # Replace with function body.
+	hpBar.size.x = (currentLife/100.0) * 198.0 # Replace with function body.
 
 # Função chamada quando uma bola entra em uma zona
 func _on_ball_entered_zone(zone: ZoneController, ball: ballController) -> void:
