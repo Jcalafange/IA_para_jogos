@@ -8,7 +8,7 @@ enum State {
 	FLEEING
 }
 
-var velocity : float = 25.0
+var velocity : float = 15.0
 var direction : int = 1
 var maxLife: float = 100.0
 var currentLife: float = 0.0
