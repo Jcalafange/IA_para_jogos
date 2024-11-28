@@ -5,7 +5,8 @@ class_name ballController
 
 enum State {
 	NORMAL,
-	FLEEING
+	FLEEING,
+	SEEKING_BUFF
 }
 
 var velocity : float = 15.0
@@ -38,14 +39,17 @@ func _ready():
 
 func _process(delta):
 	update_life_bar()
+	
 
 func move(delta):
-	#update_state()
+	update_state()
 	match currentState:
 		State.NORMAL:
 			move_towards_player(delta)
 		State.FLEEING:
 			move_away_from_player(delta)
+		State.SEEKING_BUFF:
+			move_towards_buff(delta)
 
 func _on_bullet_body_entered(body):
 	if body.is_in_group("bullets"):
@@ -78,22 +82,55 @@ func update_life_bar():
 		lifeBar.size.x = hpBar.size.x * life_percentage
 
 func update_state():
-	if currentLife <= (maxLife * 0.3):  # Se a vida do inimigo for menor que 30%, ele entra no estado de fuga
-		if currentState != State.FLEEING:
-			currentState = State.FLEEING
-			print("Entrando no estado de fuga")
-	else:
-		if currentState != State.NORMAL:
-			currentState = State.NORMAL
-			print("Voltando ao estado normal")
+	match currentState:
+		State.NORMAL:
+			if currentLife <= (maxLife * 0.3):
+				currentState = State.FLEEING
+				print("Inimigo entrou no estado FLEEING")
+		State.FLEEING:
+			var distance_to_player = position.distance_to(player.position)
+			if distance_to_player >= fleeDistance:
+				currentState = State.SEEKING_BUFF
+				print("Inimigo entrou no estado SEEKING_BUFF")
+		State.SEEKING_BUFF:
+			if currentLife >= maxLife:
+				currentState = State.NORMAL
+				print("Inimigo voltou ao estado NORMAL")
 
 # Move o inimigo para longe do jogador (fuga)
 func move_away_from_player(delta):
 	var distance_to_player = position.distance_to(player.position)  # Calcula a distância atual até o jogador
-	print("Distancia do Player: ", distance_to_player)
+	#print("Distancia do Player: ", distance_to_player)
 	if distance_to_player < fleeDistance:  # Se a distância for maior que a distância de fuga
 		var direction = (position - player.position).normalized()  # Direção para longe do jogador
 		position += direction * velocity * delta  # Move o inimigo para longe
 	else:
 		# Se a bola estiver a uma distância menor ou igual a fleeDistance, ela para
 		print("Distância de fuga alcançada, parado.")
+
+func move_towards_buff(delta):
+	var target_buff = find_nearest_buff()
+	if target_buff:
+		var direction = (target_buff.global_position - global_position).normalized()
+		position += direction * velocity * delta
+	else:
+		# Se não houver buffs disponíveis, pode retornar ao estado NORMAL ou esperar
+		currentState = State.NORMAL
+		
+func find_nearest_buff():
+	var max_search_distance = 500
+	var buffs = get_tree().get_nodes_in_group("powerups")
+	var nearest_buff = null
+	var min_distance = max_search_distance
+	for buff in buffs:
+		var distance = global_position.distance_to(buff.global_position)
+		if distance < min_distance:
+			min_distance = distance
+			nearest_buff = buff
+	return nearest_buff
+	
+func restore_life(amount):
+	currentLife += amount
+	if currentLife > maxLife:
+		currentLife = maxLife
+	print("Vida restaurada para: ", currentLife)

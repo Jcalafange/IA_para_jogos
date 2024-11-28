@@ -100,6 +100,7 @@ func spawn_power_up(power_up_type: String, position: Vector2):
 	var power_up_instance = power_up_scene.instantiate()
 	add_child(power_up_instance)
 	power_up_instance.position = position
+	power_up_instance.add_to_group("powerups")
 	# Conecta o power-up ao jogador
 	var player = get_tree().get_nodes_in_group("Player")[0]  # Supondo que o jogador está no grupo "Player"
 	#player.connect_power_dsup(power_up_instance)

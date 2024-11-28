@@ -8,6 +8,8 @@ radius = 15.0
 
 [node name="PowerUp" type="Area2D"]
 position = Vector2(-12, -6)
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_uf3g8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
