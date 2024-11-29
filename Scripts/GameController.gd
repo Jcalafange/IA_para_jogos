@@ -68,6 +68,13 @@ func connect_signals():
 		ball.connect("destruct_ball", Callable(self, "_on_ball_destructed"))
 		ball.connect("entered_zone", Callable(self, "_on_ball_entered_zone"))
 		ball.connect("exited_zone", Callable(self, "remove_ball_from_zone"))
+		ball.connect("entered_power_up", Callable(self, "_on_ball_entered_power_up"))
+
+func _on_ball_entered_power_up(ball: ballController, power_up: Node) -> void:
+	if power_up.is_in_group("powerups") and power_up.name == "PowerUpHeal":
+		# Quando a bola colide com um power-up de vida
+		ball.restore_life(20)  # Recupera 20 de vida (exemplo de valor)
+		power_up.queue_free()  # Remove o power-up do jogo após ser coletado
 
 func _on_player_status_change(currentLife):
 	hpBar.size.x = (currentLife/100.0) * 198.0 # Replace with function body.
@@ -100,6 +107,7 @@ func spawn_power_up(power_up_type: String, position: Vector2):
 	var power_up_instance = power_up_scene.instantiate()
 	add_child(power_up_instance)
 	power_up_instance.position = position
+	power_up_instance.add_to_group("powerups")
 	# Conecta o power-up ao jogador
 	var player = get_tree().get_nodes_in_group("Player")[0]  # Supondo que o jogador está no grupo "Player"
 	#player.connect_power_dsup(power_up_instance)

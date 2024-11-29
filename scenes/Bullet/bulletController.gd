@@ -11,7 +11,7 @@ func _ready():
 	$LifetimeTimer.connect("timeout", Callable(self, "_on_LifetimeTimer_timeout"))
 
 func _on_LifetimeTimer_timeout():
-	print("desstruir bala")
+	#print("desstruir bala")
 	queue_free()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
