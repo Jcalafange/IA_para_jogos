@@ -18,29 +18,38 @@ script = ExtResource("1_k3llr")
 hpBar = NodePath("HUD/PlayerLife/Bar")
 
 [node name="Zone" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 
 [node name="Zone2" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.733333, 0.337255, 0.105882, 1)
 position = Vector2(300, 0)
 
 [node name="Zone3" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(600, 0)
 
 [node name="Zone4" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682353, 0.352941, 0.219608, 1)
 position = Vector2(0, 300)
 
 [node name="Zone5" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(300, 300)
 
 [node name="Zone6" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
 position = Vector2(600, 300)
 
 [node name="Zone7" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(0, 600)
 
 [node name="Zone8" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
 position = Vector2(300, 600)
 
 [node name="Zone9" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(600, 600)
 
 [node name="ball" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
