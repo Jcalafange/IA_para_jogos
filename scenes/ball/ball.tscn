@@ -16,6 +16,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_jsisk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_jflof")
 
 [node name="Hp" type="ColorRect" parent="."]

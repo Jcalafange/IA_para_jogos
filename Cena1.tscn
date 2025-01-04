@@ -18,30 +18,111 @@ script = ExtResource("1_k3llr")
 hpBar = NodePath("HUD/PlayerLife/Bar")
 
 [node name="Zone" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 
 [node name="Zone2" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
 position = Vector2(300, 0)
 
 [node name="Zone3" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(600, 0)
 
 [node name="Zone4" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682353, 0.352941, 0.219608, 1)
 position = Vector2(0, 300)
 
 [node name="Zone5" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(300, 300)
 
 [node name="Zone6" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
 position = Vector2(600, 300)
 
 [node name="Zone7" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(0, 600)
 
 [node name="Zone8" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
 position = Vector2(300, 600)
 
 [node name="Zone9" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
 position = Vector2(600, 600)
+
+[node name="Zone10" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(0, 904)
+
+[node name="Zone11" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(300, 904)
+
+[node name="Zone12" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(600, 904)
+
+[node name="Zone13" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(-304, 600)
+
+[node name="Zone14" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-304, 904)
+
+[node name="Zone15" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(-304, -8)
+
+[node name="Zone16" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-304, 296)
+
+[node name="Zone17" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-608, -8)
+
+[node name="Zone18" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(-608, 296)
+
+[node name="Zone19" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-304, 904)
+
+[node name="Zone20" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-608, 600)
+
+[node name="Zone21" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(-608, 904)
+
+[node name="Zone22" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(0, -304)
+
+[node name="Zone23" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(300, -304)
+
+[node name="Zone24" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(600, -304)
+
+[node name="Zone25" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-304, -304)
+
+[node name="Zone26" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.87451, 0.662745, 0, 1)
+position = Vector2(-304, -304)
+
+[node name="Zone27" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
+modulate = Color(0.682756, 0.354165, 0.220219, 1)
+position = Vector2(-608, -304)
 
 [node name="ball" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(160, 155)
@@ -59,7 +140,7 @@ position = Vector2(460, 155)
 position = Vector2(760, 155)
 
 [node name="ball6" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(160, 455)
+position = Vector2(158, 470)
 
 [node name="ball8" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(760, 455)
@@ -76,6 +157,51 @@ position = Vector2(460, 755)
 [node name="ball11" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(762, 761)
 
+[node name="ball12" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(160, 1059)
+
+[node name="ball13" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(460, 1059)
+
+[node name="ball14" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(762, 1065)
+
+[node name="ball15" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-144, 755)
+
+[node name="ball16" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-144, 1059)
+
+[node name="ball17" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-448, 147)
+
+[node name="ball18" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-448, 451)
+
+[node name="ball19" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-144, 755)
+
+[node name="ball20" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-144, 1059)
+
+[node name="ball21" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(160, -149)
+
+[node name="ball22" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(460, -149)
+
+[node name="ball23" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(762, -143)
+
+[node name="ball24" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-144, -149)
+
+[node name="ball25" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
+position = Vector2(-144, -149)
+
+[node name="Bullet" parent="GameController" instance=ExtResource("7_v4s5h")]
+position = Vector2(416, 256)
+
 [node name="HUD" type="CanvasLayer" parent="GameController"]
 
 [node name="PlayerLife" type="ColorRect" parent="GameController/HUD"]
@@ -84,6 +210,7 @@ offset_top = 10.0
 offset_right = 220.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 0.509804)
+metadata/_edit_use_anchors_ = true
 
 [node name="Bar" type="ColorRect" parent="GameController/HUD/PlayerLife"]
 layout_mode = 0
@@ -92,6 +219,7 @@ offset_top = 1.0
 offset_right = 199.0
 offset_bottom = 19.0
 color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="player" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(240, 128)
@@ -109,12 +237,12 @@ shape = SubResource("RectangleShape2D_rn4r2")
 
 [node name="ShootTimer" type="Timer" parent="player"]
 
+[node name="Camera2D" type="Camera2D" parent="player"]
+zoom = Vector2(1.976, 1.976)
+
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("6_gvfge")
 bullet_scene = ExtResource("7_v4s5h")
-
-[node name="Bullet" parent="." instance=ExtResource("7_v4s5h")]
-position = Vector2(416, 256)
 
 [connection signal="StatusChange" from="player" to="GameController" method="_on_player_status_change"]
 [connection signal="shoot" from="player" to="BulletManager" method="_on_player_shoot"]

@@ -7,6 +7,7 @@
 radius = 15.0
 
 [node name="PowerUp" type="Area2D"]
+top_level = true
 position = Vector2(-12, -6)
 collision_layer = 4
 collision_mask = 3
@@ -18,5 +19,6 @@ scale = Vector2(0.9375, 0.9375)
 texture = ExtResource("2_uufnl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(13, 6)
 shape = SubResource("CircleShape2D_uoynv")
