@@ -5,6 +5,7 @@ extends Node2D
 func _on_player_shoot(pos, dir):
 	var bullet = bullet_scene.instantiate()
 	add_child(bullet)
+	bullet.creator = 'player'
 	bullet.position = pos
 	bullet.direction = dir.normalized()
 	bullet.rotation = dir.angle() + PI / 2

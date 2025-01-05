@@ -2,6 +2,13 @@ extends Area2D
 
 class_name ballController
 
+# Enum para os tipos de inimigos
+enum EnemyType {
+	MELEE,
+	RANGED
+}
+
+# Estado do inimigo
 enum State {
 	NORMAL,
 	ATTACKING,
@@ -9,32 +16,42 @@ enum State {
 	SEEKING_BUFF
 }
 
-var velocity : float = 15.0
-var direction : int = 1
-var maxLife: float = 100.0
-var currentLife: float = 0.0
-signal destruct_ball
-var player : Node2D
+@export var enemy_type: EnemyType = EnemyType.MELEE  # Tipo do inimigo
+@export var shooting_distance: float = 100.0  # Distância para disparar (apenas para RANGED)
+@export var velocity: float = 15.0
+@export var attackDistance: float = 5.0  # Distância de ataque corpo a corpo
+@export var maxLife: float = 100.0
 
-signal entered_zone(zone)  
-signal exited_zone(zone)   
-signal entered_power_up(power_up)
-var attackDistance : float = 5.0  # Distância de ataque do inimigo
-
-var hpBar : ColorRect
-var lifeBar : ColorRect
-
+var currentLife: float = maxLife
 var currentState: State = State.NORMAL
+var bullet_scene: PackedScene
+var can_shoot: bool = true
+
+signal destruct_ball
+signal entered_zone(zone)
+signal exited_zone(zone)
+signal entered_power_up(power_up)
+
+var player: Node2D
+var hpBar: ColorRect
+var lifeBar: ColorRect
+var predicted_player_position: Vector2 = Vector2()
 
 func _ready():
 	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	connect("area_entered", Callable(self, "_on_area_entered"))
 	connect("area_exited", Callable(self, "_on_area_exited"))
+	
 	player = get_node("/root/Node2D/player")
 	currentLife = maxLife
-	
-	hpBar = $Hp  
+	hpBar = $Hp
 	lifeBar = hpBar.get_node("Bar")
+	
+	if player.has_method("get_velocity"):
+		predicted_player_position = player.position  # Inicialização
+
+	if enemy_type == EnemyType.RANGED:
+		bullet_scene = preload("res://scenes/Bullet/bullet.tscn")  # Carrega a cena da bala
 
 func move(delta):
 	update_life_bar()
@@ -42,50 +59,46 @@ func move(delta):
 
 func _on_bullet_body_entered(body):
 	if body.is_in_group("bullets"):
-		body.queue_free()
-		currentLife -= 30
-		if currentLife <= 0:
-			emit_signal("destruct_ball", self)
-			queue_free()
+		if body.has_method("get_creator") and body.get_creator() == "player":
+			# Executa a lógica apenas se a bala foi criada pelo jogador
+			body.queue_free()
+			currentLife -= 30
+			if currentLife <= 0:
+				emit_signal("destruct_ball", self)
+				queue_free()
 
-# Detecta quando a bola entra em uma zona
 func _on_area_entered(area: ZoneController):
-	if area is ZoneController:  # Verifica se a área com a qual a bola colidiu é uma zona
-		emit_signal("entered_zone", area, self)  # Emite o sinal para o GameController
+	if area is ZoneController:
+		emit_signal("entered_zone", area, self)
 
-# Detecta quando a bola sai de uma zona
 func _on_area_exited(area: ZoneController):
 	if area is ZoneController:
 		emit_signal("exited_zone", area, self)
 
-func _on_powerUp_entered(area: Area2D):
-	if area.is_in_group("powerups"):  # Verifica se é um power-up
-		emit_signal("entered_power_up", self, area)
+func get_predicted_player_position(delta: float) -> Vector2:
+	if not player or not player.has_method("get_velocity"):
+		return player.position  # Retorna a posição atual se não houver previsão possível
+
+	var player_velocity: Vector2 = player.get_velocity()
+	return player.position + player_velocity * delta
 
 func update_life_bar():
 	if lifeBar:
 		var life_percentage = currentLife / maxLife
 		lifeBar.size.x = hpBar.size.x * life_percentage
 
-# A árvore de decisões que determina o estado do inimigo
 func make_decision(delta):
-	# Verificando as condições para a árvore de decisões
 	if should_attack():
 		currentState = State.ATTACKING
-		print("Atacando o jogador")
 	elif should_flee():
 		currentState = State.FLEEING
-		print("Estado de fuga")
 	elif should_seek_buff():
 		currentState = State.SEEKING_BUFF
-		print("Buscando power-up")
 	else:
 		currentState = State.NORMAL
-		print("Estado normal")
 
-	# Movimenta de acordo com o estado atual
 	match currentState:
-		State.ATTACKING:  # Se o inimigo estiver atacando
+		State.ATTACKING:
 			attack_player()
 		State.NORMAL:
 			move_towards_player(delta)
@@ -94,30 +107,26 @@ func make_decision(delta):
 		State.SEEKING_BUFF:
 			move_towards_buff(delta)
 
-# Função que verifica se o inimigo deve atacar
 func should_attack() -> bool:
 	var distance_to_player = position.distance_to(player.position)
-	if distance_to_player <= attackDistance:  # Se o inimigo estiver dentro da distância de ataque
+	if enemy_type == EnemyType.MELEE and distance_to_player <= attackDistance:
+		return true
+	elif enemy_type == EnemyType.RANGED and distance_to_player <= shooting_distance:
 		return true
 	return false
 
-# Função que verifica se o inimigo deve fugir
 func should_flee() -> bool:
-	if currentLife <= (maxLife * 0.3):  # Se a vida for menor que 30%
+	if currentLife <= (maxLife * 0.3):
 		return true
-	var distance_to_player = position.distance_to(player.position)
 	return false
 
-# Função que verifica se o inimigo deve procurar um buff
 func should_seek_buff() -> bool:
-	var distance_to_player = position.distance_to(player.position)
-	if distance_to_player >= 200:  # Se o inimigo estiver longe do jogador
+	if position.distance_to(player.position) >= 200:
 		var nearest_buff = find_nearest_buff()
 		if nearest_buff:
-			return true  # Se existir um buff dentro de um raio
+			return true
 	return false
 
-# Encontrar o buff mais próximo
 func find_nearest_buff():
 	var max_search_distance = 500
 	var buffs = get_tree().get_nodes_in_group("powerups")
@@ -130,37 +139,49 @@ func find_nearest_buff():
 			nearest_buff = buff
 	return nearest_buff
 
-# Move o inimigo para longe do jogador (fuga)
+func attack_player():
+	var target_position = get_predicted_player_position(get_process_delta_time())
+	if enemy_type == EnemyType.MELEE:
+		move_towards_player(get_process_delta_time())
+	elif enemy_type == EnemyType.RANGED and can_shoot:
+		shoot_at_position(target_position)
+
+func shoot_at_position(target_position: Vector2):
+	if not bullet_scene:
+		print("Cena da bala não configurada!")
+		return
+	var bullet = bullet_scene.instantiate()
+	get_parent().add_child(bullet)
+	bullet.global_position = global_position
+	var direction = (target_position - global_position).normalized()
+	bullet.direction = direction
+	bullet.rotation = direction.angle() + PI / 2
+	bullet.add_to_group("bullets")
+	can_shoot = false
+	$ShootTimer.start()
+
+func _on_shoot_timer_timeout():
+	can_shoot = true
+
 func move_away_from_player(delta):
-	var distance_to_player = position.distance_to(player.position)
-	if distance_to_player < 200:  # Distância de fuga
-		var direction = (position - player.position).normalized()  # Direção para longe do jogador
-		position += direction * velocity * delta  # Move o inimigo para longe
-	else:
-		print("Distância de fuga alcançada, parado.")
+	var target_position = get_predicted_player_position(delta)
+	var direction = (position - target_position).normalized()
+	position += direction * velocity * delta
 
-# Move o inimigo em direção ao jogador
 func move_towards_player(delta):
-	var direction = (player.position - position).normalized()  # Calcula a direção para o jogador
-	position += direction * velocity * delta  # Move a bola na direção do jogador com base na velocidade
+	var target_position = get_predicted_player_position(delta)
+	var direction = (target_position - position).normalized()
+	position += direction * velocity * delta
 
-# Move o inimigo em direção ao buff
 func move_towards_buff(delta):
 	var target_buff = find_nearest_buff()
 	if target_buff:
 		var direction = (target_buff.global_position - global_position).normalized()
 		position += direction * velocity * delta
 	else:
-		print("Nenhum buff disponível, retornando ao estado normal.")
 		currentState = State.NORMAL
 
-# Função para restaurar vida
 func restore_life(amount):
 	currentLife += amount
 	if currentLife > maxLife:
 		currentLife = maxLife
-	print("Vida restaurada para: ", currentLife)
-
-# Função para atacar o jogador
-func attack_player():
-	print("Inimigo atacando o jogador!")
