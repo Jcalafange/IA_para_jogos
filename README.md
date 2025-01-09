@@ -8,7 +8,7 @@ O inimigo mudar seu comportamento baseado em seu estado
 
 Perseguindo
 
-<a> ![imagem](Enemy1folow1.PNG) ![imagem](Enemy1folow2.PNG)</a>
+<a> ![imagem](Enemy1follow1.PNG) ![imagem](Enemy1follow2.PNG)</a>
 
 Atacando(existe dois tipos de inimigos, foi utilizado o exemplo do inimigo a distancia)
 
