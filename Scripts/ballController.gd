@@ -13,12 +13,14 @@ enum State {
 	NORMAL,
 	ATTACKING,
 	FLEEING,
+	AVOID,
 	SEEKING_BUFF
 }
 
 @export var enemy_type: EnemyType = EnemyType.MELEE  # Tipo do inimigo
 @export var shooting_distance: float = 100.0  # Distância para disparar (apenas para RANGED)
-@export var velocity: float = 15.0
+@export var avoidance_radius: float = 50.0
+@export var velocity: float = 25.0
 @export var attackDistance: float = 5.0  # Distância de ataque corpo a corpo
 @export var maxLife: float = 100.0
 
@@ -37,10 +39,17 @@ var hpBar: ColorRect
 var lifeBar: ColorRect
 var predicted_player_position: Vector2 = Vector2()
 
+# Variáveis para lidar com a detecção de balas
+var evasion_area: Area2D
+var evasion_shape: CollisionShape2D
+var bullet_position: Vector2
+var bullet_velocity: Vector2
+
 func _ready():
 	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	connect("area_entered", Callable(self, "_on_area_entered"))
 	connect("area_exited", Callable(self, "_on_area_exited"))
+	
 	var rangedTexture = load("res://sprints/path2.png")
 	
 	player = get_node("/root/Node2D/player")
@@ -54,6 +63,12 @@ func _ready():
 	if enemy_type == EnemyType.RANGED:
 		bullet_scene = preload("res://scenes/Bullet/bullet.tscn")  # Carrega a cena da bala
 		$Sprite2D.texture = rangedTexture
+	
+	# Referência para o nó Evasion
+	evasion_area = $Evasion
+	evasion_shape = evasion_area.get_node("CollisionShape2D")
+	evasion_area.connect("area_entered", Callable(self, "on_evasion_area_entered"))
+	evasion_area.connect("area_exited", Callable(self, "on_evasion_area_exited"))
 
 func move(delta):
 	update_life_bar()
@@ -61,9 +76,9 @@ func move(delta):
 
 func _on_bullet_body_entered(body):
 	if body.is_in_group("bullets"):
+		# Verifica se a bala foi disparada pelo jogador
 		if body.has_method("get_creator") and body.get_creator() == "player":
-			# Executa a lógica apenas se a bala foi criada pelo jogador
-			body.queue_free()
+			body.queue_free()  # Destroi a bala
 			currentLife -= 30
 			if currentLife <= 0:
 				emit_signal("destruct_ball", self)
@@ -84,6 +99,52 @@ func get_predicted_player_position(delta: float) -> Vector2:
 	var player_velocity: Vector2 = player.get_velocity()
 	return player.position + player_velocity * delta
 
+# Detecção de balas e mudança para o estado de evasão
+func on_evasion_area_entered(area: Area2D):
+	if area.is_in_group("bullets"):
+		# Obtemos a posição e direção da bala
+		bullet_position = area.global_position
+		bullet_velocity = area.get("direction") * area.get("speed")  # Direção e velocidade da bala
+		currentState = State.AVOID  # Entra no estado de evasão
+
+func on_evasion_area_exited(area: Area2D):
+	if area.is_in_group("bullets"):  # A bala saiu da zona de evasão, o inimigo pode retomar a perseguição
+		currentState = State.NORMAL
+
+# Comportamento de desvio (evitar a bala)
+func avoid_bullet(delta):
+	print("Desviar com 45 graus")
+	
+	# Previsão de onde a bala estará dentro de um intervalo de tempo
+	var prediction_time = position.distance_to(bullet_position) / bullet_velocity.length()
+	var predicted_bullet_position = bullet_position + bullet_velocity * prediction_time
+	
+	# Calcula a direção para perseguir o jogador
+	var direction_to_player = (player.position - position).normalized()  # Direção do inimigo para o jogador
+	
+	# Calcula a direção do desvio lateral em relação à bala
+	var direction_to_bullet = (position - predicted_bullet_position).normalized()  # Direção para desviar da bala
+
+	# Determina se o inimigo vai desviar para a esquerda ou para a direita
+	var cross_product = direction_to_player.x * direction_to_bullet.y - direction_to_player.y * direction_to_bullet.x
+	var lateral_direction = 0  # 1 para direita, -1 para esquerda
+	
+	# Definir o desvio lateral dependendo do lado onde a bala vem
+	if cross_product > 0:
+		lateral_direction = 1  # Desviar para a direita
+	elif cross_product < 0:
+		lateral_direction = -1  # Desviar para a esquerda
+	
+	# Ângulo do desvio de 45 graus em radianos
+	var angle_offset = deg_to_rad(90) * lateral_direction
+	
+	# Calcula a direção final do movimento do inimigo, aplicando o desvio
+	var final_direction = direction_to_player.rotated(angle_offset)  # Rotaciona a direção do inimigo em 45 graus
+	final_direction = final_direction.normalized()  # Garante que a direção seja normalizada
+	
+	# Movimento suave do inimigo, mantendo a perseguição ao jogador, mas com o desvio aplicado
+	position += final_direction * (velocity + 50) * delta
+
 func update_life_bar():
 	if lifeBar:
 		var life_percentage = currentLife / maxLife
@@ -96,6 +157,8 @@ func make_decision(delta):
 		currentState = State.FLEEING
 	elif should_seek_buff():
 		currentState = State.SEEKING_BUFF
+	elif currentState == State.AVOID:  # Se o inimigo está no estado de evasão, faz desvio
+		avoid_bullet(delta)
 	else:
 		currentState = State.NORMAL
 
@@ -106,9 +169,12 @@ func make_decision(delta):
 			move_towards_player(delta)
 		State.FLEEING:
 			move_away_from_player(delta)
+		State.AVOID:
+			avoid_bullet(delta)  # Evasão durante o estado de desvio
 		State.SEEKING_BUFF:
 			move_towards_buff(delta)
 
+# Funções auxiliares
 func should_attack() -> bool:
 	var distance_to_player = position.distance_to(player.position)
 	if enemy_type == EnemyType.MELEE and distance_to_player <= attackDistance:
