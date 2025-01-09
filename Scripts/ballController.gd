@@ -41,6 +41,7 @@ func _ready():
 	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	connect("area_entered", Callable(self, "_on_area_entered"))
 	connect("area_exited", Callable(self, "_on_area_exited"))
+	var rangedTexture = load("res://sprints/path2.png")
 	
 	player = get_node("/root/Node2D/player")
 	currentLife = maxLife
@@ -52,6 +53,7 @@ func _ready():
 
 	if enemy_type == EnemyType.RANGED:
 		bullet_scene = preload("res://scenes/Bullet/bullet.tscn")  # Carrega a cena da bala
+		$Sprite2D.texture = rangedTexture
 
 func move(delta):
 	update_life_bar()
@@ -156,7 +158,8 @@ func shoot_at_position(target_position: Vector2):
 	var direction = (target_position - global_position).normalized()
 	bullet.direction = direction
 	bullet.rotation = direction.angle() + PI / 2
-	bullet.add_to_group("bullets")
+	bullet.creator = 'enemy'
+	bullet.add_to_group("Enemybullets")
 	can_shoot = false
 	$ShootTimer.start()
 

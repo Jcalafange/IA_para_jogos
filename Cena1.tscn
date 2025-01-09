@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvkx8053yek68"]
+[gd_scene load_steps=9 format=3 uid="uid://dvkx8053yek68"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
 [ext_resource type="PackedScene" uid="uid://c46y1mpjb84cc" path="res://scenes/zonas/Zone.tscn" id="2_ibn4e"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cflhx2ul21p2t" path="res://icon.svg" id="4_xq5yl"]
 [ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="6_gvfge"]
 [ext_resource type="PackedScene" uid="uid://c1dr2qejk47wc" path="res://scenes/Bullet/bullet.tscn" id="7_v4s5h"]
-[ext_resource type="PackedScene" uid="uid://bxwuhmjb7uxwr" path="res://scenes/ballD/ball.tscn" id="8_dai5q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rn4r2"]
 size = Vector2(52, 52)
@@ -150,6 +149,7 @@ position = Vector2(760, 455)
 
 [node name="ball7" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(460, 455)
+enemy_type = 1
 
 [node name="ball9" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(160, 755)
@@ -246,11 +246,6 @@ zoom = Vector2(1.976, 1.976)
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("6_gvfge")
 bullet_scene = ExtResource("7_v4s5h")
-
-[node name="ball" parent="." instance=ExtResource("8_dai5q")]
-position = Vector2(360, 248)
-enemy_type = 1
-shooting_distance = 10.0
 
 [connection signal="StatusChange" from="player" to="GameController" method="_on_player_status_change"]
 [connection signal="shoot" from="player" to="BulletManager" method="_on_player_shoot"]
