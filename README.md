@@ -5,4 +5,4 @@ João Vitor Calafange de Carvalho Lopes
 
 Steering Behavior:
 O inimigo tentara desviar dos disparos realizados pelo player
-<a ![imagem](Avoid1.png)>
+<a> ![imagem](Avoid1.png)</a>
