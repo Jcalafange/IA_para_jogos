@@ -11,6 +11,7 @@ signal shoot
 signal StatusChange
 
 func _ready():
+	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	currentLife = maxLife
 
 func _physics_process(delta: float) -> void:
@@ -41,6 +42,7 @@ func _physics_process(delta: float) -> void:
 	# Checa colisão com zonas
 	check_zone_collision()
 	check_enemy_collision()
+	check_bullet_collision()
 
 func check_zone_collision() -> void:
 	for zone in get_tree().get_nodes_in_group("zones"):
@@ -71,13 +73,35 @@ func check_enemy_collision() -> void:
 			# Verifica se a posição da bola está dentro do raio do inimigo
 				if position.distance_to(enemy.position) < collision_shape.shape.radius:
 					# Aplica dano ao jogador
-					currentLife -= 2
+					currentLife -= 5
 					print(currentLife)
 					StatusChange.emit(currentLife)
 					if currentLife <= 0:
 						currentLife = 0
 						print("Game Over")  # Chama a função para reiniciar o jogo
 					break  # Sai do loop após a colisão
+
+func check_bullet_collision() -> void:
+	for bullet in get_tree().get_nodes_in_group("Enemybullets"):
+		if bullet.has_node("CollisionShape2D"):
+			var collision_shape = bullet.get_node("CollisionShape2D") as CollisionShape2D
+			if collision_shape and collision_shape.shape is RectangleShape2D:
+				# Verifica se a posição da bala está dentro do retângulo do personagem
+				var rect_size = collision_shape.shape.extents * 2  # Tamanho total do retângulo
+				var bullet_position = bullet.global_position
+				if self.global_position.x > bullet_position.x - rect_size.x / 2 and \
+					self.global_position.x < bullet_position.x + rect_size.x / 2 and \
+					self.global_position.y > bullet_position.y - rect_size.y / 2 and \
+					self.global_position.y < bullet_position.y + rect_size.y / 2:
+					print("Disparo acertou!")
+					currentLife -= 10  # Dano do bullet
+					StatusChange.emit(currentLife)  # Emite o sinal de mudança de status (vida)
+					if currentLife <= 0:
+						currentLife = 0
+						print("Game Over")  # Lógica de reinício do jogo ou game over
+					bullet.queue_free()
+					break
+
 
 func _on_shoot_timer_timeout():
 	can_shoot = true # Replace with function body.
