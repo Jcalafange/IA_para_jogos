@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://301w0ptyr8gi"]
+
+[ext_resource type="Texture2D" uid="uid://d07slgxm0w723" path="res://sprints/path1.png" id="1_jigkw"]
+[ext_resource type="Script" path="res://scenes/enemy/new_enemy.gd" id="1_rts6d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k3726"]
+radius = 29.0689
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_rts6d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jigkw")
+
+[node name="hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k3726")
+debug_color = Color(0.829517, 0.370649, 0.362072, 0.42)

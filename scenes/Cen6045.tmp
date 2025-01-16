@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://kat1qaylyosh"]
+
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_mnnax"]
+[ext_resource type="PackedScene" uid="uid://c46y1mpjb84cc" path="res://scenes/zonas/Zone.tscn" id="2_gehrq"]
+[ext_resource type="PackedScene" uid="uid://dbc8wuotnjyt2" path="res://scenes/player/player.tscn" id="3_rnee1"]
+[ext_resource type="PackedScene" uid="uid://301w0ptyr8gi" path="res://scenes/enemy/enemy.tscn" id="5_ibw34"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("1_mnnax")
+
+[node name="Zona1" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(0, 1)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona1" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona1" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona1" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="player" parent="." instance=ExtResource("3_rnee1")]
+position = Vector2(297, 279)

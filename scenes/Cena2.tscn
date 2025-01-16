@@ -1,0 +1,169 @@
+[gd_scene load_steps=8 format=3 uid="uid://kat1qaylyosh"]
+
+[ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_mnnax"]
+[ext_resource type="PackedScene" uid="uid://c46y1mpjb84cc" path="res://scenes/zonas/Zone.tscn" id="2_gehrq"]
+[ext_resource type="PackedScene" uid="uid://dbc8wuotnjyt2" path="res://scenes/player/player.tscn" id="3_rnee1"]
+[ext_resource type="PackedScene" uid="uid://301w0ptyr8gi" path="res://scenes/enemy/enemy.tscn" id="5_ibw34"]
+[ext_resource type="PackedScene" uid="uid://c1dr2qejk47wc" path="res://scenes/Bullet/bullet.tscn" id="5_lafwo"]
+[ext_resource type="PackedScene" uid="uid://bacharsqt7e7" path="res://hud.tscn" id="6_tt51r"]
+[ext_resource type="PackedScene" uid="uid://chjpqae87lin5" path="res://scenes/Bullet/bullet_manager.tscn" id="7_sfh1c"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="GameManager" type="Node2D" parent="."]
+script = ExtResource("1_mnnax")
+
+[node name="Zona1" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(0, 1)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona1" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona1" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona1" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona2" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(600, 1)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona2" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona2" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona2" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona3" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(1200, 1)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona3" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona3" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona3" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona4" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(0, 600)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona4" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona4" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona4" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona5" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(600, 600)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona5" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona5" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona5" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona6" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(1200, 600)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona6" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona6" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona6" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona7" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(0, 1200)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona7" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona7" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona7" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona8" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(600, 1200)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona8" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona8" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona8" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="Zona9" parent="." groups=["Zonas"] instance=ExtResource("2_gehrq")]
+position = Vector2(1200, 1200)
+scale = Vector2(2, 2)
+
+[node name="Enemy" parent="Zona9" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(54.5, 157)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy2" parent="Zona9" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(86, 189)
+scale = Vector2(0.5, 0.5)
+
+[node name="Enemy3" parent="Zona9" groups=["Enemys"] instance=ExtResource("5_ibw34")]
+position = Vector2(202.5, 81)
+scale = Vector2(0.5, 0.5)
+
+[node name="player" parent="." instance=ExtResource("3_rnee1")]
+position = Vector2(297, 279)
+
+[node name="Bullet" parent="." instance=ExtResource("5_lafwo")]
+position = Vector2(-53, 974)
+
+[node name="HUD" parent="." instance=ExtResource("6_tt51r")]
+
+[node name="BulletManager" parent="." instance=ExtResource("7_sfh1c")]
+position = Vector2(-176, 530)
