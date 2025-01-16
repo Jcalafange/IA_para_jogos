@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvkx8053yek68"]
+[gd_scene load_steps=11 format=3 uid="uid://dvkx8053yek68"]
 
 [ext_resource type="Script" path="res://Scripts/GameController.gd" id="1_k3llr"]
 [ext_resource type="PackedScene" uid="uid://c46y1mpjb84cc" path="res://scenes/zonas/Zone.tscn" id="2_ibn4e"]
 [ext_resource type="PackedScene" uid="uid://c7yjtaywdoswx" path="res://scenes/ball/ball.tscn" id="3_glsyj"]
 [ext_resource type="Script" path="res://Scripts/bola.gd" id="3_opcuk"]
+[ext_resource type="Texture2D" uid="uid://dwrvjxtuxssb" path="res://sprints/brick.png" id="3_pycwx"]
 [ext_resource type="Texture2D" uid="uid://cflhx2ul21p2t" path="res://icon.svg" id="4_xq5yl"]
 [ext_resource type="Script" path="res://Scripts/BulletManager.gd" id="6_gvfge"]
 [ext_resource type="PackedScene" uid="uid://c1dr2qejk47wc" path="res://scenes/Bullet/bullet.tscn" id="7_v4s5h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aprri"]
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rn4r2"]
 size = Vector2(52, 52)
@@ -19,6 +23,31 @@ hpBar = NodePath("HUD/PlayerLife/Bar")
 
 [node name="Zone" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
 modulate = Color(0.87451, 0.662745, 0, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GameController/Zone"]
+position = Vector2(135, 65)
+disable_mode = 2
+collision_layer = 3
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zone/StaticBody2D"]
+shape = SubResource("RectangleShape2D_aprri")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameController/Zone/StaticBody2D"]
+texture = ExtResource("3_pycwx")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="GameController/Zone"]
+position = Vector2(103, 65)
+collision_layer = 3
+collision_mask = 7
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameController/Zone/StaticBody2D2"]
+shape = SubResource("RectangleShape2D_aprri")
+
+[node name="Sprite2D" type="Sprite2D" parent="GameController/Zone/StaticBody2D2"]
+texture = ExtResource("3_pycwx")
 
 [node name="Zone2" parent="GameController" groups=["Zonas"] instance=ExtResource("2_ibn4e")]
 modulate = Color(0.682756, 0.354165, 0.220219, 1)
@@ -125,14 +154,14 @@ modulate = Color(0.682756, 0.354165, 0.220219, 1)
 position = Vector2(-608, -304)
 
 [node name="ball" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(160, 155)
+position = Vector2(48, 197)
 
 [node name="ball2" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(222, 222)
+position = Vector2(137, 259)
 enemy_type = 1
 
 [node name="ball3" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
-position = Vector2(84, 93)
+position = Vector2(56, 250)
 
 [node name="ball4" parent="GameController" groups=["Balls"] instance=ExtResource("3_glsyj")]
 position = Vector2(460, 155)
