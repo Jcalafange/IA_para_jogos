@@ -7,11 +7,13 @@ extends CharacterBody2D
 
 var can_shoot : bool = true
 
+@onready var bulletManager = $"../BulletManager"
+
 signal shoot
 signal StatusChange
 
 func _ready():
-	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
+	#connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	currentLife = maxLife
 
 func _physics_process(delta: float) -> void:
@@ -28,9 +30,13 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("move_up"):
 		velocity.y -= speed
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
-		#print('Disparar')
-		var dir = get_global_mouse_position() - position
-		shoot.emit(position, dir)
+		print('Disparar')
+		 # Direção do disparo
+		var dir = (get_global_mouse_position() - global_position).normalized()
+		var shooter_size = $Sprite2D.texture.get_size() / 4  # Obter metade do tamanho do sprite
+		# Posição inicial do disparo ajustada
+		var shoot_position = global_position + (dir * shooter_size.length())
+		shoot.emit(shoot_position, dir)
 		can_shoot = false
 		$ShootTimer.start()
 
@@ -81,6 +87,10 @@ func check_enemy_collision() -> void:
 						print("Game Over")  # Chama a função para reiniciar o jogo
 					break  # Sai do loop após a colisão
 
+func takeDamage(damage):
+	currentLife -= damage
+	StatusChange.emit(currentLife)
+	
 func check_bullet_collision() -> void:
 	for bullet in get_tree().get_nodes_in_group("Enemybullets"):
 		if bullet.has_node("CollisionShape2D"):

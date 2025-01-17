@@ -40,5 +40,5 @@ func distribute_enemies():
 	for zone in all_zones:
 		#zone.enemies_in_zone = []  # Garante que a lista esteja limpa
 		for enemy in all_enemys:
-			if zone.is_inside_zone(enemy):
+			if zone.is_inside_zone(enemy) and (enemy not in zone.enemys_in_zone):
 				zone.enemys_in_zone.append(enemy)

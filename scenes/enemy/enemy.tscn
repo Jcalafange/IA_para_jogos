@@ -1,17 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://301w0ptyr8gi"]
+[gd_scene load_steps=5 format=3 uid="uid://301w0ptyr8gi"]
 
 [ext_resource type="Texture2D" uid="uid://d07slgxm0w723" path="res://sprints/path1.png" id="1_jigkw"]
 [ext_resource type="Script" path="res://scenes/enemy/new_enemy.gd" id="1_rts6d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k3726"]
-radius = 29.0689
+radius = 14.3178
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_73yos"]
+radius = 27.0
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_rts6d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8.34465e-07, -7.15256e-07)
+scale = Vector2(0.504386, 0.504386)
 texture = ExtResource("1_jigkw")
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_k3726")
 debug_color = Color(0.829517, 0.370649, 0.362072, 0.42)
+
+[node name="Hp" type="ColorRect" parent="."]
+offset_left = -50.0
+offset_top = -31.0
+offset_right = 50.0
+offset_bottom = -21.0
+color = Color(0, 0, 0, 0.509804)
+
+[node name="Bar" type="ColorRect" parent="Hp"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 99.0
+offset_bottom = 9.0
+color = Color(0.843137, 0, 0, 1)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="Evasion" type="Area2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Evasion"]
+shape = SubResource("CircleShape2D_73yos")
+
+[node name="AvoidTimer" type="Timer" parent="."]
+wait_time = 5.0

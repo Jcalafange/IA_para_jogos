@@ -19,8 +19,6 @@ func _ready():
 	# Ajuste o caminho do player conforme necessário
 	player = get_node("/root/Node2D/player")  # Supondo que "player" seja filho de "Node2D"
 
-	for enemy in enemys_in_zone:
-		enemy.connect("destruct_enemy", Callable(self, "_on_enemy_destructed"))
 
 func _on_body_entered(body):
 	if body.is_in_group("Enemys"):
@@ -29,6 +27,8 @@ func _on_body_entered(body):
 			emit_signal("enemy_entered_zone", body, self)
 			print("Inimigo entrou na zona:", self.name, "Inimigo:", body.name)
 	elif body.is_in_group("Player"):
+		print(self.name)
+		print(enemys_in_zone)
 		print("O player entrou na zona:", self.name)
 		GameController.toggle_zone(self)
 
@@ -39,6 +39,7 @@ func _on_body_exited(body):
 			emit_signal("enemy_exited_zone", body, self)
 			print("Inimigo saiu da zona:", self.name, "Inimigo:", body.name)
 	elif body.is_in_group("Player"):
+
 		print("O player saiu da zona:", self.name)
 		GameController.toggle_zone(self)
 
@@ -61,8 +62,6 @@ func move_enemys(delta: float) -> void:
 		if enemy and is_instance_valid(enemy):
 			enemy.move(delta)
 
-func _on_enemy_destructed(enemy: Node2D) -> void:
-	enemys_in_zone.erase(enemy)
 
 func get_zone_bounds() -> Rect2:
 	var collision_shape = $CollisionShape2D.shape
