@@ -5,16 +5,12 @@ class_name KillPlayerGoal
 func get_clazz(): 
 	return "KillPlayerGoal"
 
-# O objetivo é válido apenas se o jogador estiver visível.
+# O objetivo de matar o jogador é válido quando o jogador está ao alcance do inimigo.
 func is_valid() -> bool:
-	return WorldState.get_state("player_visible", false)
+	return WorldState.get_state("player_in_range", false)
 
-# Define a prioridade para o objetivo. Pode ser mais alta, pois "matar" é um objetivo importante.
-func priority() -> int:
-	return 3  # Definido para ser mais alto do que perseguir.
-
-# Estado desejado: o jogador está morto.
+# Estado desejado: o jogador morreu.
 func get_desired_state() -> Dictionary:
 	return {
-		"player_dead": true
+		"player_dead": true  # Indica que o jogador foi morto
 	}

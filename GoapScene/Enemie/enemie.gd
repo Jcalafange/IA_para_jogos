@@ -8,15 +8,17 @@ var chase_speed = 100
 @onready var player = $"../player"  # Referência ao nó do jogador.
 
 func _ready():
+	print("Planejador Preparado")
 	var agent = GoapAgent.new()
-	agent.init(self, [
-		ChasePlayerGoal.new()
-	])
-
+	agent.init(self, [ChasePlayerGoal.new(), KillPlayerGoal.new()])
 	add_child(agent)
-	set_process(true)
+	print("Objetivos:")
+	for goal in agent._goals:
+		print(goal.get_clazz())  # A função get_clazz() retorna o nome do objetivo ou classe
+	print("_________")
+	#set_process(true)
 
-func _process(delta):
+func followPlayer(delta):
 	# Calcula a direção para o jogador
 	var direction = (player.position - position).normalized()
 	

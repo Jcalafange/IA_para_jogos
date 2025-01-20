@@ -14,13 +14,13 @@ func get_cost(_blackboard) -> int:
 # Pré-condições para executar esta ação.
 func get_preconditions() -> Dictionary:
 	return {
-		"player_visible": true
+		"player_visible": true  # O jogador precisa estar visível para a perseguição começar.
 	}
 
 # Efeitos da ação: o jogador está ao alcance.
 func get_effects() -> Dictionary:
 	return {
-		"player_in_range": true
+		"player_in_range": true  # Após a ação, o jogador está dentro do alcance do inimigo.
 	}
 
 # Lógica para executar a perseguição.
@@ -30,20 +30,10 @@ func perform(actor, delta) -> bool:
 		return false
 
 	var direction = actor.position.direction_to(player.position)
-	actor.move_to(direction, delta)
+	actor.move_and_slide(direction * 100)  # Ajuste a velocidade de movimento conforme necessário
 
 	# Verifica se o inimigo está próximo o suficiente do jogador.
-	if actor.position.distance_to(player.position) < 10:
-		# Quando o inimigo está perto, causa dano ao jogador
-		if player.has_method("currentLife"):
-			player.currentLife -= 10  # Diminui 10 da vida do jogador
+	if actor.position.distance_to(player.position) < 10:  # Distância de "alcance" do jogador
+		return true  # O inimigo alcançou o jogador
 
-		# Verifica se a vida do jogador chegou a zero
-		if player.currentLife <= 0:
-			# O jogador morre
-			WorldState.set_state("player_dead", true)
-			return true
-
-		return true  # O inimigo atingiu o jogador
-
-	return false  # O inimigo ainda está perseguindo o jogador
+	return false  # O inimigo ainda está perseguindo

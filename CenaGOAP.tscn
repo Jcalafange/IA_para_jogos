@@ -31,3 +31,5 @@ position = Vector2(25, 76)
 
 [node name="Enemie" parent="." groups=["Enemies"] instance=ExtResource("4_kve8a")]
 position = Vector2(405, 222)
+
+[connection signal="shoot" from="player" to="BulletManager" method="_on_player_shoot"]
