@@ -9,7 +9,7 @@ func get_clazz():
 func get_cost(_blackboard) -> int:
 	var actor = _blackboard.get("actor")
 	var player = _blackboard.get("player")
-	return actor.position.distance_to(player.position)
+	return 1
 
 # Pré-condições para executar esta ação.
 func get_preconditions() -> Dictionary:
@@ -30,7 +30,8 @@ func perform(actor, delta) -> bool:
 		return false
 
 	var direction = actor.position.direction_to(player.position)
-	actor.move_and_slide(direction * 100)  # Ajuste a velocidade de movimento conforme necessário
+	actor.velocity = direction * 100
+	actor.move_and_slide()  # Ajuste a velocidade de movimento conforme necessário
 
 	# Verifica se o inimigo está próximo o suficiente do jogador.
 	if actor.position.distance_to(player.position) < 10:  # Distância de "alcance" do jogador

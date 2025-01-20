@@ -46,9 +46,14 @@ func _get_best_goal():
 	var highest_priority_goal = null
 	# Percorre todos os objetivos e encontra o com a maior prioridade
 	for goal in _goals:
+		
 		if goal.is_valid():
+			print(goal.get_clazz())
+			print(goal.priority())
 			if highest_priority_goal == null or goal.priority() > highest_priority_goal.priority():
+				print(str(highest_priority_goal) + " | " + str(goal.priority()))
 				highest_priority_goal = goal
+				print("Melhor Objetivo: " + highest_priority_goal.get_clazz())
 	
 	return highest_priority_goal
 

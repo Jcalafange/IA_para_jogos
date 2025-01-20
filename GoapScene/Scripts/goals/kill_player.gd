@@ -9,6 +9,9 @@ func get_clazz():
 func is_valid() -> bool:
 	return WorldState.get_state("player_in_range", false)
 
+func priority() -> int:
+	return 3
+
 # Estado desejado: o jogador morreu.
 func get_desired_state() -> Dictionary:
 	return {

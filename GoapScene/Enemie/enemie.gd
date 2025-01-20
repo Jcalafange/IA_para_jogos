@@ -18,7 +18,6 @@ func _ready():
 	print("_________")
 	#set_process(true)
 
-
 func followPlayer(delta):
 	# Calcula a direção para o jogador
 	var direction = (player.position - position).normalized()
