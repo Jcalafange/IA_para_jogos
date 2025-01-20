@@ -127,4 +127,3 @@ func print_all_zones_and_balls() -> void:
 			ball_names.append(ball.name)
 		# Imprime o nome da zona e suas bolas
 		print(zone.name + ": " + str(ball_names))
-

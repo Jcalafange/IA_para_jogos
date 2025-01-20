@@ -11,7 +11,7 @@ signal shoot
 signal StatusChange
 
 func _ready():
-	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
+	#connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	currentLife = maxLife
 
 func _physics_process(delta: float) -> void:
