@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp5gx5ao5yg1o"]
+
+[ext_resource type="Script" path="res://Scripts/bola.gd" id="1_ysqou"]
+[ext_resource type="Texture2D" uid="uid://ynmy01bhi32t" path="res://assets/tilesets/tilemap_packed.png" id="2_0yrw5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgcj8"]
+atlas = ExtResource("2_0yrw5")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rn4r2"]
+size = Vector2(16, 15)
+
+[node name="player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 7
+script = ExtResource("1_ysqou")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4.375, 3.875)
+scale = Vector2(0.953125, 0.890625)
+texture = SubResource("AtlasTexture_mgcj8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-4, 3.5)
+shape = SubResource("RectangleShape2D_rn4r2")
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

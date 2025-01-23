@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameController="*res://Scripts/GameController.gd"
+WorldState="*res://GoapScene/Scripts/worldState.gd"
+Goap="*res://GoapScene/Scripts/goap.gd"
 
 [display]
 

@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckftyrj1l3hqs"]
+
+[ext_resource type="Script" path="res://GoapScene/Enemie/enemie.gd" id="1_qnw0d"]
+[ext_resource type="Texture2D" uid="uid://ynmy01bhi32t" path="res://assets/tilesets/tilemap_packed.png" id="2_ji3oj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1x4i"]
+atlas = ExtResource("2_ji3oj")
+region = Rect2(16, 144, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw2t4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mduoy"]
+size = Vector2(22, 22)
+
+[node name="Enemie" type="CharacterBody2D"]
+script = ExtResource("1_qnw0d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_j1x4i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lw2t4")
+
+[node name="hitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+shape = SubResource("RectangleShape2D_mduoy")
+debug_color = Color(0.951142, 0.222595, 5.77569e-07, 0.42)
+
+[node name="MaxLife" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -12.0
+color = Color(0.184314, 0.184314, 0.184314, 0.576471)
+
+[node name="CurrentLife" type="ColorRect" parent="MaxLife"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 39.0
+offset_bottom = 3.0
+color = Color(0.882353, 0, 0.141176, 0.52549)
+
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]

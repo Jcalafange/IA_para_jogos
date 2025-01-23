@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://defxvcuq6i52d"
-path="res://.godot/imported/Enemy1follow1.PNG-8daf276e065b3b7ffcded640d13040d3.ctex"
+uid="uid://bdefv0w0xgt3e"
+path="res://.godot/imported/Bricks_001.png-79659ad8c3d4f704ee36fb2d2072f973.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Enemy1follow1.PNG"
-dest_files=["res://.godot/imported/Enemy1follow1.PNG-8daf276e065b3b7ffcded640d13040d3.ctex"]
+source_file="res://assets/Bricks_001.png"
+dest_files=["res://.godot/imported/Bricks_001.png-79659ad8c3d4f704ee36fb2d2072f973.ctex"]
 
 [params]
 

@@ -11,7 +11,7 @@ signal shoot
 signal StatusChange
 
 func _ready():
-	connect("area_entered", Callable(self, "_on_bullet_body_entered"))
+	#connect("area_entered", Callable(self, "_on_bullet_body_entered"))
 	currentLife = maxLife
 
 func _physics_process(delta: float) -> void:
@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
 		#print('Disparar')
 		var dir = get_global_mouse_position() - position
+		#print("posição do player: ", position)
 		shoot.emit(position, dir)
 		can_shoot = false
 		$ShootTimer.start()
