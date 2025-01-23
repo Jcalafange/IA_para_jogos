@@ -1,44 +1,52 @@
-# Projeto de Inteligência Artificial para Jogos
+# **Projeto de Inteligência Artificial para Jogos**
 
 **Integrantes do Grupo:**
-- Danilo de Souza Braga Aciole
-- João Vitor Calafange de Carvalho Lopes
+- Danilo de Souza Braga Aciole  
+- João Vitor Calafange de Carvalho Lopes  
 
-## Descrição do Projeto
+---
 
-O projeto foi desenvolvido como parte da disciplina de Inteligência Artificial para Jogos, com o objetivo de implementar um sistema de AI para inimigos que reagem de acordo com o estado atual do jogo, utilizando *Behavior Trees* e *Steering Behaviors*.
+## **Descrição do Projeto**
 
-## Comportamentos do Inimigo
+Este projeto foi desenvolvido como parte da disciplina de **Inteligência Artificial para Jogos**, com o objetivo de implementar um sistema de inteligência artificial (IA) para inimigos. O sistema utiliza duas abordagens principais: **Behavior Trees** e **Steering Behaviors**. A IA é projetada para reagir dinamicamente ao estado atual do jogo, permitindo que os inimigos tomem decisões estratégicas e adaptativas.
 
-O inimigo no jogo muda seu comportamento com base em seu estado atual. Abaixo, estão descritos os três principais comportamentos implementados.
+---
 
-### 1. **Perseguindo**
+## **Comportamentos do Inimigo**
 
-O inimigo começa a perseguir o jogador quando ele entra em seu campo de visão. Esse comportamento é ativado quando o inimigo detecta a presença do jogador e o segue até uma distância apropriada.
+O inimigo possui três possíveis objetivos principais, definidos com base em condições específicas do jogo:
 
-#### Exemplo Visual - Perseguindo:
-![Inimigo perseguindo 1](Enemy1follow1.PNG)
-![Inimigo perseguindo 2](Enemy1follow2.PNG)
+### **1. Chase Player (Perseguir o Jogador)**  
+- **Descrição:** O inimigo persegue o jogador até que este esteja a uma certa distância (dentro do alcance).  
+- **Estado inicial:** O jogador está fora do alcance e o inimigo não precisa se curar.  
+- **Estado desejado:** O jogador está dentro do alcance do inimigo.  
 
-### 2. **Atacando**
+### **2. Heal (Curar-se)**  
+- **Descrição:** Quando o inimigo perde uma certa quantidade de vida, ele busca uma área de cura para se recuperar.  
+- **Estado inicial:** O inimigo precisa de cura.  
+- **Estado desejado:** O inimigo não precisa mais de cura.  
 
-Existem dois tipos de inimigos no jogo: inimigos corpo a corpo e inimigos à distância. O exemplo abaixo demonstra o comportamento de um inimigo à distância, que ataca o jogador quando está em uma posição segura.
+### **3. Stay (Permanecer Parado)**  
+- **Descrição:** O inimigo permanece parado e observa o jogador, sem realizar outras ações.  
+- **Estado inicial:** O jogador está dentro do alcance do inimigo.  
+- **Estado desejado:** O jogador saiu do alcance ou o inimigo recuperou um nível suficiente de vida.  
 
-#### Exemplo Visual - Inimigo atacando:
-![Inimigo atacando](Enemy2Atack.PNG)
+---
 
-### 3. **Fugindo**
+## **Ações do Inimigo**
 
-Se o inimigo estiver em desvantagem (por exemplo, com pouca vida ou enfrentando um ataque forte do jogador), ele pode ativar o comportamento de fuga, tentando escapar para uma área segura.
+Para atingir os objetivos definidos, o inimigo pode executar as seguintes ações:  
 
-#### Exemplo Visual - Inimigo fugindo:
-![Inimigo fugindo 1](Enemy1Flee1.PNG)
-![Inimigo fugindo 2](Enemy1Flee2.PNG)
+### **1. Chase Player (Perseguir o Jogador)**  
+- **Descrição:** O inimigo segue o jogador até que ele esteja dentro do alcance.  
 
-## Steering Behavior
+### **2. Chase Healer (Ir para a Área de Cura)**  
+- **Descrição:** O inimigo se desloca até a área de cura para se recuperar.  
 
-Além dos comportamentos baseados no estado do inimigo, foi implementado um **Steering Behavior**, onde o inimigo tenta desviar dos disparos feitos pelo jogador. Esse comportamento visa aumentar a dificuldade e a imersão do jogo, tornando a IA mais dinâmica e desafiadora.
+### **3. Stay (Ficar Parado)**  
+- **Descrição:** O inimigo permanece imóvel, recuperando parte de sua vida enquanto está parado.  
 
-#### Exemplo Visual - Inimigo evitando tiros:
-![Inimigo evitando tiros 1](Avoid1.PNG)
-![Inimigo evitando tiros 2](Avoid2.PNG)
+### **4. Do Nothing (Ficar Observando)**  
+- **Descrição:** O inimigo permanece parado observando o jogador, sem realizar nenhuma ação, até que o jogador saia do alcance.  
+
+---
