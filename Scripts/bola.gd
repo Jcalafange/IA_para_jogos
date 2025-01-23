@@ -28,8 +28,9 @@ func _physics_process(delta: float) -> void:
 	elif Input.is_action_pressed("move_up"):
 		velocity.y -= speed
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
-		print('Disparar')
+		#print('Disparar')
 		var dir = get_global_mouse_position() - position
+		#print("posição do player: ", position)
 		shoot.emit(position, dir)
 		can_shoot = false
 		$ShootTimer.start()

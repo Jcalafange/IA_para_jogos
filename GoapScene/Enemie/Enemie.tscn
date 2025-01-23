@@ -16,6 +16,7 @@ size = Vector2(22, 22)
 script = ExtResource("1_qnw0d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = SubResource("AtlasTexture_j1x4i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -27,4 +28,20 @@ shape = SubResource("RectangleShape2D_lw2t4")
 shape = SubResource("RectangleShape2D_mduoy")
 debug_color = Color(0.951142, 0.222595, 5.77569e-07, 0.42)
 
+[node name="MaxLife" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -12.0
+color = Color(0.184314, 0.184314, 0.184314, 0.576471)
+
+[node name="CurrentLife" type="ColorRect" parent="MaxLife"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 39.0
+offset_bottom = 3.0
+color = Color(0.882353, 0, 0.141176, 0.52549)
+
+[connection signal="area_entered" from="hitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="body_entered" from="hitBox" to="." method="_on_hit_box_body_entered"]

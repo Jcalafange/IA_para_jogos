@@ -11,12 +11,12 @@ region = Rect2(0, 112, 16, 16)
 size = Vector2(16, 15)
 
 [node name="player" type="CharacterBody2D" groups=["Player"]]
-position = Vector2(4, -3)
 collision_mask = 7
 script = ExtResource("1_ysqou")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(-4.375, 3.875)
 scale = Vector2(0.953125, 0.890625)
 texture = SubResource("AtlasTexture_mgcj8")

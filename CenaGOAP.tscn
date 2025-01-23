@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bsw7w1tgio82b"]
+[gd_scene load_steps=9 format=4 uid="uid://bsw7w1tgio82b"]
 
 [ext_resource type="PackedScene" uid="uid://dp5gx5ao5yg1o" path="res://scenes/Player/player.tscn" id="1_7dmto"]
 [ext_resource type="Script" path="res://cena_goap.gd" id="1_k6e0f"]
@@ -6,11 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bdj2ucym8ro53" path="res://scenes/Bullet/bullet_manager.tscn" id="2_pbrnv"]
 [ext_resource type="PackedScene" uid="uid://dgboyv73eyikf" path="res://mapaGrids.tscn" id="2_tktyy"]
 [ext_resource type="PackedScene" uid="uid://ckftyrj1l3hqs" path="res://GoapScene/Enemie/Enemie.tscn" id="4_kve8a"]
+[ext_resource type="PackedScene" uid="uid://dv3moy1tl3lbd" path="res://GoapScene/Enemie/enemy_healer.tscn" id="7_thixh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5w7y"]
 size = Vector2(925, 676)
 
-[node name="CenaGoap" type="Node2D"]
+[node name="CenaGoap" type="Node2D" groups=["bullets"]]
 script = ExtResource("1_k6e0f")
 
 [node name="TileMap" parent="." instance=ExtResource("2_tktyy")]
@@ -36,6 +37,11 @@ position = Vector2(445, 437)
 position = Vector2(25, 76)
 
 [node name="Enemie" parent="." groups=["Enemies"] instance=ExtResource("4_kve8a")]
-position = Vector2(522, 419)
+position = Vector2(519, 404)
+
+[node name="EnemyHealer" parent="." groups=["EnemieHealer"] instance=ExtResource("7_thixh")]
+position = Vector2(566, 556)
 
 [connection signal="shoot" from="player" to="BulletManager" method="_on_player_shoot"]
+[connection signal="body_entered" from="EnemyHealer" to="EnemyHealer" method="_on_body_entered"]
+[connection signal="body_exited" from="EnemyHealer" to="EnemyHealer" method="_on_body_exited"]
